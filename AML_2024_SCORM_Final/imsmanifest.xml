@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest identifier="_65zcTcZJvdE_course_id" version="1.0" xmlns="http://www.imsproject.org/xsd/imscp_rootv1p1p2" xmlns:adlcp="http://www.adlnet.org/xsd/adlcp_rootv1p2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsproject.org/xsd/imscp_rootv1p1p2 imscp_rootv1p1p2.xsd http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd http://www.adlnet.org/xsd/adlcp_rootv1p2 adlcp_rootv1p2.xsd">
+  <metadata>
+    <schema>ADL SCORM</schema>
+    <schemaversion>1.2</schemaversion>
+    <lom xmlns="http://www.imsglobal.org/xsd/imsmd_rootv1p2p1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.imsglobal.org/xsd/imsmd_rootv1p2p1 imsmd_rootv1p2p1.xsd">
+      <general>
+        <title>
+          <langstring xml:lang="x-none">AML for Financial Services 2024</langstring>
+        </title>
+      </general>
+      <lifecycle>
+        <version>
+          <langstring xml:lang="x-none">1</langstring>
+        </version>
+        <status>
+          <source>
+            <langstring xml:lang="x-none">LOMv1.0</langstring>
+          </source>
+          <value>
+            <langstring xml:lang="x-none">Final</langstring>
+          </value>
+        </status>
+      </lifecycle>
+      <metametadata>
+        <metadatascheme>ADL SCORM 1.2</metadatascheme>
+      </metametadata>
+      <educational>
+        <typicallearningtime>
+          <datetime>PT0H0M0S</datetime>
+        </typicallearningtime>
+      </educational>
+      <rights>
+        <cost>
+          <source>
+            <langstring xml:lang="x-none">LOMv1.0</langstring>
+          </source>
+          <value>
+            <langstring xml:lang="x-none">yes</langstring>
+          </value>
+        </cost>
+        <copyrightandotherrestrictions>
+          <source>
+            <langstring xml:lang="x-none">LOMv1.0</langstring>
+          </source>
+          <value>
+            <langstring xml:lang="x-none">yes</langstring>
+          </value>
+        </copyrightandotherrestrictions>
+      </rights>
+    </lom>
+  </metadata>
+  <organizations default="AML_for_Financial_Services_2024_ORG">
+    <organization identifier="AML_for_Financial_Services_2024_ORG">
+      <title>AML for Financial Services 2024</title>
+      <item identifier="AML_Financial_Services_2021_SCO" isvisible="true" identifierref="__65zcTcZJvdE_course_id_RES">
+        <title>AML for Financial Services 2024</title>
+        <adlcp:masteryscore>80</adlcp:masteryscore>
+      </item>
+    </organization>
+  </organizations>
+  <resources>
+    <resource identifier="__65zcTcZJvdE_course_id_RES" type="webcontent" href="index_lms.html" adlcp:scormtype="sco">
+      <file href="story_content/thumbnail.jpg" />
+      <file href="mobile/6IIh0WZa99c_M_84_84.png" />
+      <file href="mobile/5u86zPzzrOR_M_342_342.png" />
+      <file href="mobile/6o81rNCImyG_M_1122_1122.png" />
+      <file href="mobile/6HM8BQ9KSPA_M_1502_1502_P_0_0_877_1516.png" />
+      <file href="story_content/video_6NFy80oT0YK_22_48_700x452.mp4" />
+      <file href="mobile/poster_6WwfSYVsGi6_video_6NFy80oT0YK_22_48_700x452.jpg" />
+      <file href="mobile/5z3X6kdNyR5_M_1124_1124.png" />
+      <file href="story_content/5kNYUmuIScS.js" />
+      <file href="story_content/zoomIcon.png" />
+      <file href="mobile/5XU3ODb3lhW_80_P_34_63_542_551.jpg" />
+      <file href="mobile/poster_6lfTmJpqPSl_video_6NFy80oT0YK_22_48_700x452.jpg" />
+      <file href="mobile/6Y36e3qUTQH_M_1292_1292_P_0_0_1315_1597.png" />
+      <file href="mobile/6Fxe6CcJYm9_M_628_628.png" />
+      <file href="mobile/5aiPiHxScYJ_80.jpg" />
+      <file href="mobile/66hc7CmUh7H_M_610_610.png" />
+      <file href="mobile/6bPkdQsM7YR_M_578_578.png" />
+      <file href="mobile/5vr9beQ7LUB_M_818_818.png" />
+      <file href="mobile/6Fxe6CcJYm9_M_630_630.png" />
+      <file href="mobile/5eskfp7GF7M_M_718_718.png" />
+      <file href="mobile/6jJ2wL30pzT.png" />
+      <file href="mobile/6eJMamwcb59.png" />
+      <file href="mobile/6WtBZAc0EZx.png" />
+      <file href="mobile/6aTlwUqlBFa.png" />
+      <file href="mobile/5xHRIpvMTNn_M_804_804.png" />
+      <file href="mobile/6RpHzBWZRYt_M_1132_1132_P_0_0_781_334.png" />
+      <file href="mobile/poster_6jw2W3lXxq6_video_6NFy80oT0YK_22_48_700x452.jpg" />
+      <file href="mobile/6eqQAame3eP.png" />
+      <file href="mobile/68LJtIpDAG9_80.jpg" />
+      <file href="mobile/poster_5lKTiLmDzET_video_6NFy80oT0YK_22_48_700x452.jpg" />
+      <file href="mobile/6CxBZuPyCZI_80.jpg" />
+      <file href="mobile/6btritV1Opr_M_794_794.png" />
+      <file href="mobile/poster_6M72ex591hZ_video_6NFy80oT0YK_22_48_700x452.jpg" />
+      <file href="mobile/5wDReKha8Aq_P_0_374_131_130.png" />
+      <file href="mobile/5wDReKha8Aq_P_0_0_128_134.png" />
+      <file href="mobile/5wDReKha8Aq_P_0_181_136_140.png" />
+      <file href="mobile/5wDReKha8Aq_P_397_0_131_133.png" />
+      <file href="story_content/video_6J3UsaSgriZ_22_48_580x346.mp4" />
+      <file href="mobile/poster_5k7dKT9FZOo_video_6J3UsaSgriZ_22_48_580x346.jpg" />
+      <file href="mobile/5qA5JTSgVIV.png" />
+      <file href="mobile/5pnJg00vUFh_80.jpg" />
+      <file href="mobile/6hrCqc6zYcd_80.jpg" />
+      <file href="mobile/6e5KCYiIdE8_M_564_564.png" />
+      <file href="mobile/5o97lbVXcxt_80_P_178_0_1504_1668.jpg" />
+      <file href="mobile/6gSRiv1h39L.png" />
+      <file href="mobile/65Oc0EXgMSe_80_P_186_180_783_1037.jpg" />
+      <file href="mobile/6E0wETIzRSd_M_928_928_P_206_170_3354_838.png" />
+      <file href="mobile/6aRvRBeGY2o_M_1048_1048_P_329_312_3586_719.png" />
+      <file href="mobile/5YBfBBdKlaS_M_1000_1000_P_276_269_3523_713.png" />
+      <file href="mobile/5fsacrZgypF_80.jpg" />
+      <file href="mobile/5v5jtT38wKn_M_526_526.png" />
+      <file href="mobile/6YjtoUukjsr_M_992_992.png" />
+      <file href="mobile/6dN1q9NJ8pX_80.jpg" />
+      <file href="mobile/6334foBTKzJ_M_572_572.png" />
+      <file href="mobile/poster_5clSKRxw2jP_video_6NFy80oT0YK_22_48_700x452.jpg" />
+      <file href="mobile/6JiYlgHOZLD_M_972_469.png" />
+      <file href="mobile/poster_5xafwhSmyCx_video_6NFy80oT0YK_22_48_700x452.jpg" />
+      <file href="mobile/6T25jjF6m3Q_M_576_576.png" />
+      <file href="mobile/6qWv99K97bO_M_552_552.png" />
+      <file href="mobile/6XxjbdTzcTr_M_582_582.png" />
+      <file href="mobile/poster_6eaQxGFGxic_video_6NFy80oT0YK_22_48_700x452.jpg" />
+      <file href="mobile/6MReOLgvJur_80_P_0_0_2048_1322.jpg" />
+      <file href="mobile/5XsUj51mJxA_M_862_862_P_0_0_817_2070.png" />
+      <file href="mobile/6aQN6I0lNm5_M_1574_1574_P_0_0_817_2070.png" />
+      <file href="mobile/6my0icX3esr_M_1574_1574_P_0_0_817_1579.png" />
+      <file href="mobile/6QWEXDduWgE_M_1574_1574_P_0_0_817_1579.png" />
+      <file href="mobile/6aQN6I0lNm5_M_1574_1574_P_0_0_817_1579.png" />
+      <file href="mobile/6HM8BQ9KSPA_M_1502_1502_P_0_0_877_1570.png" />
+      <file href="meta.xml" />
+      <file href="story_content/5xN4bITdbFC.png" />
+      <file href="story_content/user.js" />
+      <file href="story_content/external_files/anti-money-laundering-and-countering-the-financing-of-terrorism-guidelines-for-the-financial-sector.pdf" />
+      <file href="mobile/txt__default_6PEH2Oa1Iac.png" />
+      <file href="mobile/txt__default_5owLIeZ16Db.png" />
+      <file href="mobile/Shape5tw9GzCg2MT.png" />
+      <file href="mobile/Shape5x9wd695ZqE.png" />
+      <file href="mobile/txt__default_5tU8XSfXcaX.png" />
+      <file href="mobile/txt__default_6Ln7vwbPnlZ.png" />
+      <file href="mobile/txt__default_5ibrGNRxYqj.png" />
+      <file href="mobile/txt__default_6OcJXrShNKw.png" />
+      <file href="mobile/txt__default_5VXwDnDa8lE.png" />
+      <file href="mobile/txt__default_6LxjGWTB75b.png" />
+      <file href="mobile/txt__default_6fb4siuewUh.png" />
+      <file href="mobile/txt__default_64aOT8j9jaU.png" />
+      <file href="mobile/txt__default_6aM63gC2XpY.png" />
+      <file href="mobile/Shape6HMukImnXDZ.png" />
+      <file href="mobile/Shape5Y1lOYyfG2Y.png" />
+      <file href="mobile/Shape5cwhlXcp5vj.png" />
+      <file href="mobile/Shape66Pkcj5zQGy.png" />
+      <file href="mobile/Shape6DCQf8hkB29.png" />
+      <file href="mobile/Shape5Wchm5zcVuj.png" />
+      <file href="mobile/Shape6W5KCEJGC7L.png" />
+      <file href="mobile/Shape6G8kTcNuXiD.png" />
+      <file href="mobile/Shape683bBdO6B64.png" />
+      <file href="mobile/Shape6ZGbXd1QBgS.png" />
+      <file href="mobile/Shape5Vbo15GyOMQ.png" />
+      <file href="html5/data/css/output.min.css" />
+      <file href="html5/data/js/5a3pob604xu.js" />
+      <file href="html5/data/js/5bKTvsZSB9R.js" />
+      <file href="html5/data/js/5cEuFYOLtzl.js" />
+      <file href="html5/data/js/5crlUGutcoD.js" />
+      <file href="html5/data/js/5cS2kuPPhfo.js" />
+      <file href="html5/data/js/5cVGRnQQw5G.js" />
+      <file href="html5/data/js/5e73kG379Vz.js" />
+      <file href="html5/data/js/5f2geFtCk8E.js" />
+      <file href="html5/data/js/5fMOfxcCD9V.js" />
+      <file href="html5/data/js/5gXOINpxlrW.js" />
+      <file href="html5/data/js/5hEhJfRIjEc.js" />
+      <file href="html5/data/js/5hJfntNZnzH.js" />
+      <file href="html5/data/js/5hxa0D57HjR.js" />
+      <file href="html5/data/js/5hxIYfQECGx.js" />
+      <file href="html5/data/js/5hzJA1ZSJNs.js" />
+      <file href="html5/data/js/5ip9QThyZio.js" />
+      <file href="html5/data/js/5iw8Dp3ePvh.js" />
+      <file href="html5/data/js/5jJtfGTtV05.js" />
+      <file href="html5/data/js/5kN5Xq19sa5.js" />
+      <file href="html5/data/js/5l58FxXPJh5.js" />
+      <file href="html5/data/js/5o4Xh0fLmns.js" />
+      <file href="html5/data/js/5onUy8y6qqo.js" />
+      <file href="html5/data/js/5q50L5XgUcw.js" />
+      <file href="html5/data/js/5sxa2fDr0HW.js" />
+      <file href="html5/data/js/5tUoKsrFIji.js" />
+      <file href="html5/data/js/5v0MKBPViSL.js" />
+      <file href="html5/data/js/5v7SLksv9X1.js" />
+      <file href="html5/data/js/5VB5yoz23Vu.js" />
+      <file href="html5/data/js/5VcC6z363dM.js" />
+      <file href="html5/data/js/5VMnWDbr2pz.js" />
+      <file href="html5/data/js/5vVxzkqrZJw.js" />
+      <file href="html5/data/js/5vwlEEtY5er.js" />
+      <file href="html5/data/js/5WuRTNWwPbJ.js" />
+      <file href="html5/data/js/5x3aayMfwvm.js" />
+      <file href="html5/data/js/5XBW7VVh4t3.js" />
+      <file href="html5/data/js/5xPG3K98BlL.js" />
+      <file href="html5/data/js/5XwMO1xmhyz.js" />
+      <file href="html5/data/js/5y3aS1uxbR0.js" />
+      <file href="html5/data/js/5Ymr4IAOSY8.js" />
+      <file href="html5/data/js/5ZcyyWdJUAY.js" />
+      <file href="html5/data/js/5ZSh9cWR1yC.js" />
+      <file href="html5/data/js/5ZsLCD7hDn0.js" />
+      <file href="html5/data/js/60GcNENqtp3.js" />
+      <file href="html5/data/js/61A98IT1tyL.js" />
+      <file href="html5/data/js/61uNdGTWfqx.js" />
+      <file href="html5/data/js/65ijhAw5msD.js" />
+      <file href="html5/data/js/66m8qWOgJag.js" />
+      <file href="html5/data/js/675QcHuOL91.js" />
+      <file href="html5/data/js/68vGCHDs6Kr.js" />
+      <file href="html5/data/js/6BAJtn8Vy5M.js" />
+      <file href="html5/data/js/6bQbuudULRd.js" />
+      <file href="html5/data/js/6Cft2OW6PDN.js" />
+      <file href="html5/data/js/6co499lMmCj.js" />
+      <file href="html5/data/js/6DHNvVJSDPb.js" />
+      <file href="html5/data/js/6DtWigdAQU8.js" />
+      <file href="html5/data/js/6DvTws4axzQ.js" />
+      <file href="html5/data/js/6dz9JSL9fBN.js" />
+      <file href="html5/data/js/6ELDTz4La7n.js" />
+      <file href="html5/data/js/6f43o0Pvio9.js" />
+      <file href="html5/data/js/6FrMXjgmD5i.js" />
+      <file href="html5/data/js/6h26NpfX0wN.js" />
+      <file href="html5/data/js/6HkK1bF9xLu.js" />
+      <file href="html5/data/js/6HV2XJbvoQA.js" />
+      <file href="html5/data/js/6IIXDzpOUce.js" />
+      <file href="html5/data/js/6IvPe0k4aFe.js" />
+      <file href="html5/data/js/6Je7IlbaKKa.js" />
+      <file href="html5/data/js/6JfkdQ5TkPl.js" />
+      <file href="html5/data/js/6JWk3LmLplj.js" />
+      <file href="html5/data/js/6jxpWQWPFzv.js" />
+      <file href="html5/data/js/6KcSFP69fqp.js" />
+      <file href="html5/data/js/6Kn4xjUoxnn.js" />
+      <file href="html5/data/js/6KqGK6Lp0id.js" />
+      <file href="html5/data/js/6LJPqCbnJLj.js" />
+      <file href="html5/data/js/6lpfPjbrVoG.js" />
+      <file href="html5/data/js/6LQPCc5g67D.js" />
+      <file href="html5/data/js/6mEnNnULpKu.js" />
+      <file href="html5/data/js/6mh8QqIrlb1.js" />
+      <file href="html5/data/js/6n7veKQwCvU.js" />
+      <file href="html5/data/js/6NLYEz0nVhi.js" />
+      <file href="html5/data/js/6Nt0vJziAcD.js" />
+      <file href="html5/data/js/6p43UL5tQq1.js" />
+      <file href="html5/data/js/6PGjTcaHQr7.js" />
+      <file href="html5/data/js/6q2tbNGDai0.js" />
+      <file href="html5/data/js/6rNcgJOxj21.js" />
+      <file href="html5/data/js/data.js" />
+      <file href="html5/data/js/frame.js" />
+      <file href="html5/data/js/paths.js" />
+      <file href="html5/lib/scripts/bootstrapper.min.js" />
+      <file href="html5/lib/scripts/frame.desktop.min.js" />
+      <file href="html5/lib/scripts/frame.mobile.min.js" />
+      <file href="html5/lib/scripts/slides.min.js" />
+      <file href="html5/lib/stylesheets/desktop.min.css" />
+      <file href="html5/lib/stylesheets/mobile.min.css" />
+      <file href="html5/lib/stylesheets/mobile-fonts/open-sans-bold.woff" />
+      <file href="html5/lib/stylesheets/mobile-fonts/open-sans-light.woff" />
+      <file href="html5/lib/stylesheets/mobile-fonts/open-sans-regular.woff" />
+      <file href="analytics-frame.html" />
+      <file href="story.html" />
+      <file href="index_lms.html" />
+      <file href="lms/AICCComm.html" />
+      <file href="lms/blank.html" />
+      <file href="lms/browsersniff.js" />
+      <file href="lms/goodbye.html" />
+      <file href="lms/scormdriver.js" />
+    </resource>
+  </resources>
+</manifest>
