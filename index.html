@@ -1,18 +1,174 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Embedded PDF</title>
-    <style>
-        body { margin: 0; }
-        canvas { display: block; }
-    </style>
+<style>
+  :root {
+    --color-low: #85FF8F; /* Green */
+    --color-mid: #5FEAFF; /* Blue */
+    --color-high: #FB5184; /* Pink */
+    --dark: #2d2d2d;
+    --white: #ffffff;
+  }
+  
+  body { 
+    font-family: 'Helvetica Neue', Arial, sans-serif; 
+    margin: 0; 
+    padding: 20px; 
+    background-color: transparent;
+    color: var(--dark);
+  }
+  
+  .menu-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+    justify-content: center;
+  }
+
+  .card {
+    flex: 1;
+    min-width: 280px;
+    max-width: 350px;
+    background: var(--white);
+    border-radius: 16px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    transition: all 0.3s ease;
+    border: 1px solid #eee;
+  }
+
+  .card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.12); }
+
+  .card-image {
+    width: 100%;
+    height: 180px;
+    background-color: #f0f0f0;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
+
+  .level-tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+    align-self: flex-start;
+  }
+
+  /* Callout Box Styling */
+  .use-case-box {
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+    line-height: 1.4;
+  }
+
+  .low .level-tag, .low .use-case-box { background: var(--color-low); color: #1a5c1e; }
+  .mid .level-tag, .mid .use-case-box { background: var(--color-mid); color: #0a4d55; }
+  .high .level-tag, .high .use-case-box { background: var(--color-high); color: var(--white); }
+
+  .use-case-box strong { display: block; margin-bottom: 4px; text-transform: uppercase; font-size: 0.7rem; letter-spacing: 0.5px; }
+
+  h2 { margin: 0 0 10px 0; font-size: 1.4rem; color: #111; }
+  p { font-size: 0.95rem; line-height: 1.5; color: #666; margin-bottom: 20px; }
+
+  .features { list-style: none; padding: 0; margin: 0 0 25px 0; font-size: 0.9rem; }
+  .features li { margin-bottom: 8px; padding-left: 20px; position: relative; }
+  .features li::before { content: "→"; position: absolute; left: 0; color: #ccc; }
+
+  .view-btn {
+    display: block;
+    text-align: center;
+    padding: 12px;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: opacity 0.2s;
+    margin-top: auto;
+  }
+
+  .low .view-btn { background: var(--color-low); color: #1a5c1e; }
+  .mid .view-btn { background: var(--color-mid); color: #0a4d55; }
+  .high .view-btn { background: var(--color-high); color: var(--white); }
+  
+  .view-btn:hover { opacity: 0.8; }
+
+</style>
 </head>
 <body>
 
-<iframe src="https://gwlasiuk.github.io/learning/build/web/viewer.html?file=learningcalendar.pdf"
-        width="100%" height="100%" style="border: none;"></iframe>
+<div class="menu-container">
+  <div class="card low">
+    <div class="card-image" style="background-image: url('https://raw.githubusercontent.com/gwlasiuk/learning/a5f84a0966a73149d80accaf3da0d0068464117f/Screenshot%202026-03-05%20111612.png')"></div>
+    <div class="content">
+      <div class="level-tag">Essential</div>
+      <h2>Knowledge Base</h2>
+      
+      <div class="use-case-box">
+        <strong>Effort & Best Use:</strong>
+        Lower time commitment. Best for large amounts of resource-style information.
+      </div>
+
+      <p>Clean, text-driven resources designed for quick reference and high accessibility.</p>
+      <ul class="features">
+        <li>Static instructional pages</li>
+        <li>Custom diagrams & icons</li>
+        <li>Downloadable PDF guides</li>
+      </ul>
+      <a href="https://heyzine.com/flip-book/c6b7e22ad7.html" class="view-btn" target="_blank">View Example</a>
+    </div>
+  </div>
+
+  <div class="card mid">
+    <div class="card-image" style="background-image: url('https://raw.githubusercontent.com/gwlasiuk/learning/refs/heads/main/Screenshot%202026-03-05%20111457.png')"></div>
+    <div class="content">
+      <div class="level-tag">Enhanced</div>
+      <h2>Interactive Learning</h2>
+      
+      <div class="use-case-box">
+        <strong>Effort & Best Use:</strong>
+        Medium time commitment. Best for thought-out, cohesive courses and training.
+      </div>
+
+      <p>Dynamic modules that guide the learner through concepts with motion and sound.</p>
+      <ul class="features">
+        <li>Animated slide transitions</li>
+        <li>Professional narration</li>
+        <li>Knowledge-check interactions</li>
+      </ul>
+      <a href="https://360.articulate.com/review/content/81d126bc-3943-4973-a6d1-053b7dc24505/review" class="view-btn" target="_blank">View Example</a>
+    </div>
+  </div>
+
+  <div class="card high">
+    <div class="card-image" style="background-image: url('https://raw.githubusercontent.com/gwlasiuk/learning/refs/heads/main/Screenshot%202026-03-05%20111136.png')"></div>
+    <div class="content">
+      <div class="level-tag">Premium</div>
+      <h2>Immersive Video</h2>
+      
+      <div class="use-case-box">
+        <strong>Effort & Best Use:</strong>
+        Large time commitment. Best for short training and important announcements.
+      </div>
+
+      <p>High-impact cinematic storytelling designed for deep engagement and culture-building.</p>
+      <ul class="features">
+        <li>Motion graphics</li>
+        <li>Custom imagery / infographics</li>
+        <li>Screen captures / tutorials</li>
+      </ul>
+      <a href="https://360.articulate.com/review/content/8f4adfde-e2ab-41a9-a82d-abd4daed750a/review" class="view-btn" target="_blank">View Example</a>
+    </div>
+  </div>
+</div>
 
 </body>
 </html>
