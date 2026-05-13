@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* EDIT HEX CODES HERE - From image_2ad576.png */
+            --color-1: #FB5184; /* Pink 60 */
+            --color-2: #FF6D37; /* Orange 60 */
+            --color-3: #6780FF; /* Indigo 50 */
+            
+            /* Text & Background */
+            --text-main: #444444;
+            --text-bold: #222222;
+            --bg-card: rgba(255, 255, 255, 0.75);
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #ffffff;
+            margin: 0;
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .calendar-row {
+            display: flex;
+            flex-direction: row;
+            gap: 25px;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .card {
+            flex: 1;
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 18px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            padding-bottom: 30px;
+            box-shadow: 0 6px 25px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .card:hover {
+            transform: translateY(-12px);
+            background: rgba(255, 255, 255, 1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.12);
+        }
+
+        .date-header {
+            width: 100%;
+            padding: 18px 0;
+            color: white;
+            font-weight: 700;
+            font-size: 1.4rem; /* Slightly larger */
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .icon-bubble {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            margin-bottom: 25px;
+        }
+
+        .card-content {
+            padding: 0 30px;
+            text-align: left; 
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .description {
+            font-size: 1.1rem; /* Increased text size */
+            line-height: 1.6;
+            color: var(--text-main);
+            margin: 0;
+        }
+
+        .description strong {
+            color: var(--text-bold);
+            font-weight: 700;
+        }
+
+        /* Color assignments using the variables above */
+        .card-1 .date-header { background-color: var(--color-1); }
+        .card-1 .icon-bubble { background-color: rgba(251, 81, 132, 0.12); border: 2.5px solid var(--color-1); }
+        
+        .card-2 .date-header { background-color: var(--color-2); }
+        .card-2 .icon-bubble { background-color: rgba(255, 109, 55, 0.12); border: 2.5px solid var(--color-2); }
+
+        .card-3 .date-header { background-color: var(--color-3); }
+        .card-3 .icon-bubble { background-color: rgba(103, 128, 255, 0.12); border: 2.5px solid var(--color-3); }
+
+        @media (max-width: 900px) {
+            .calendar-row { flex-direction: column; align-items: center; }
+            .card { width: 100%; max-width: 450px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="calendar-row">
+    <!-- Milestone 1 -->
+    <div class="card card-1">
+        <div class="date-header">June 15 – June 26</div>
+        <div class="icon-bubble">🗺️</div>
+        <div class="card-content">
+            <p class="description">
+                <strong>Self-reviews open.</strong><br>
+                This is your time to share your H1 impact in Workday.
+            </p>
+        </div>
+    </div>
+
+    <!-- Milestone 2 -->
+    <div class="card card-2">
+        <div class="date-header">June 29 – July 17</div>
+        <div class="icon-bubble">🧭</div>
+        <div class="card-content">
+            <p class="description">
+                <strong>Manager Reviews.</strong><br>
+                Managers will review your input and prepare for conversations.
+            </p>
+        </div>
+    </div>
+
+    <!-- Milestone 3 -->
+    <div class="card card-3">
+        <div class="date-header">July 20 – July 31</div>
+        <div class="icon-bubble">✈️</div>
+        <div class="card-content">
+            <p class="description">
+                <strong>1:1 Conversations.</strong><br>
+                Sync up with your manager on your performance and trajectory.
+            </p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
