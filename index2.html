@@ -6,12 +6,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            /* EDIT HEX CODES HERE - From image_2ad576.png */
-            --color-1: #FB5184; /* Pink 60 */
-            --color-2: #FF6D37; /* Orange 60 */
-            --color-3: #6780FF; /* Indigo 50 */
+            /* Colors from original design */
+            --color-1: #FB5184;
+            --color-2: #FF6D37;
+            --color-3: #6780FF;
+            --color-title-bg: #FFD54F; /* Yellow for the title rectangle */
             
-            /* Text & Background */
             --text-main: #444444;
             --text-bold: #222222;
             --bg-card: rgba(255, 255, 255, 0.75);
@@ -23,7 +23,26 @@
             margin: 0;
             padding: 40px;
             display: flex;
-            justify-content: center;
+            flex-direction: column; /* Stack title above calendar */
+            align-items: center;
+            justify-content: flex-start;
+        }
+
+        /* Title Style */
+        .title-container {
+            margin-bottom: 50px;
+            text-align: center;
+        }
+
+        .calendar-title {
+            background-color: var(--color-title-bg);
+            color: #222;
+            padding: 12px 40px;
+            border-radius: 50px; /* Makes it a rounded rectangle */
+            font-size: 2.2rem;
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: inline-block;
         }
 
         .calendar-row {
@@ -60,7 +79,7 @@
             padding: 18px 0;
             color: white;
             font-weight: 700;
-            font-size: 1.4rem; /* Slightly larger */
+            font-size: 1.4rem;
             margin-bottom: 30px;
             text-align: center;
         }
@@ -84,7 +103,7 @@
         }
 
         .description {
-            font-size: 1.1rem; /* Increased text size */
+            font-size: 1.1rem;
             line-height: 1.6;
             color: var(--text-main);
             margin: 0;
@@ -95,7 +114,6 @@
             font-weight: 700;
         }
 
-        /* Color assignments using the variables above */
         .card-1 .date-header { background-color: var(--color-1); }
         .card-1 .icon-bubble { background-color: rgba(251, 81, 132, 0.12); border: 2.5px solid var(--color-1); }
         
@@ -108,13 +126,17 @@
         @media (max-width: 900px) {
             .calendar-row { flex-direction: column; align-items: center; }
             .card { width: 100%; max-width: 450px; }
+            .calendar-title { font-size: 1.6rem; padding: 10px 25px; }
         }
     </style>
 </head>
 <body>
 
+<div class="title-container">
+    <div class="calendar-title">Mid-Year Review Process 2026</div>
+</div>
+
 <div class="calendar-row">
-    <!-- Milestone 1 -->
     <div class="card card-1">
         <div class="date-header">June 15 – June 26</div>
         <div class="icon-bubble">🗺️</div>
@@ -126,7 +148,6 @@
         </div>
     </div>
 
-    <!-- Milestone 2 -->
     <div class="card card-2">
         <div class="date-header">June 29 – July 17</div>
         <div class="icon-bubble">🧭</div>
@@ -138,7 +159,6 @@
         </div>
     </div>
 
-    <!-- Milestone 3 -->
     <div class="card card-3">
         <div class="date-header">July 20 – July 31</div>
         <div class="icon-bubble">✈️</div>
