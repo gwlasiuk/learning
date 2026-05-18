@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --color-1: #FB5184;
+            --color-2: #FF6D37;
+            --color-3: #6780FF;
+            --color-title-bg: #FFD54F;
+            
+            --text-main: #444444;
+            --text-bold: #222222;
+            --bg-card: rgba(255, 255, 255, 0.9); 
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: transparent; 
+            margin: 0;
+            padding: 20px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .title-container {
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        .calendar-title {
+            background-color: var(--color-title-bg);
+            color: #222;
+            padding: 10px 30px; /* Adjusted padding to match smaller text */
+            border-radius: 50px;
+            font-size: 1.4rem; /* Made the title smaller */
+            font-weight: 700;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: inline-block;
+        }
+
+        .calendar-row {
+            display: flex;
+            flex-direction: row;
+            gap: 20px;
+            width: 100%;
+            max-width: 1100px;
+        }
+
+        .card {
+            flex: 1;
+            background: var(--bg-card);
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            border-radius: 18px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center; 
+            padding-bottom: 30px;
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.05);
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .date-header {
+            width: 100%;
+            padding: 15px 0;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+
+        .card-content {
+            padding: 0 25px;
+            text-align: left; 
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .description {
+            font-size: 1rem;
+            line-height: 1.5;
+            color: var(--text-main);
+            margin: 0;
+        }
+
+        .card-1 .date-header { background-color: var(--color-1); }
+        .card-2 .date-header { background-color: var(--color-2); }
+        .card-3 .date-header { background-color: var(--color-3); }
+
+        @media (max-width: 900px) {
+            .calendar-row { flex-direction: column; align-items: center; }
+            .card { width: 100%; max-width: 400px; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="title-container">
+    <div class="calendar-title">Mid-Year Review Process 2026</div>
+</div>
+
+<div class="calendar-row">
+    <div class="card card-1">
+        <div class="date-header">June 15 – June 26</div>
+        <div class="card-content">
+            <p class="description"><strong>Self-reviews open.</strong><br>Share your H1 impact in Workday.</p>
+        </div>
+    </div>
+
+    <div class="card card-2">
+        <div class="date-header">June 29 – July 17</div>
+        <div class="card-content">
+            <p class="description"><strong>Manager Reviews.</strong><br>Managers prepare for conversations.</p>
+        </div>
+    </div>
+
+    <div class="card card-3">
+        <div class="date-header">July 20 – July 31</div>
+        <div class="card-content">
+            <p class="description"><strong>1:1 Conversations.</strong><br>Sync up on performance and trajectory.</p>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
