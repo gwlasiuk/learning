@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: transparent; 
+            margin: 0;
+            padding: 20px; 
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .animation-container {
+            display: flex;
+            flex-direction: row;
+            width: 100%;
+            max-width: 1100px;
+            background: transparent;
+        }
+
+        svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .path-label {
+            font-family: 'Poppins', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            fill: #000000;
+            letter-spacing: 1px;
+        }
+
+        .flight-path {
+            stroke: #000000;
+            stroke-width: 3;
+            stroke-dasharray: 5, 5; 
+            fill: none;
+        }
+
+        /* Updated offset-path to use a smooth Bezier curve map */
+        .airplane {
+            offset-path: path('M 150 220 C 200 130, 250 130, 300 200 C 350 270, 400 270, 450 180 C 500 90, 550 90, 600 170 C 650 250, 720 250, 790 220'); 
+            offset-rotate: auto 90deg; 
+            animation: fly 8s infinite linear; /* Eased it to 8s for an ultra-smooth glide */
+        }
+
+        @keyframes fly {
+            0% {
+                offset-distance: 0%;
+            }
+            100% {
+                offset-distance: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="animation-container">
+    <svg viewBox="0 0 1000 350">
+        <text x="135" y="226" text-anchor="end" class="path-label">YEAR-END</text>
+
+        <path class="flight-path" d="M 150 220 C 200 130, 250 130, 300 200 C 350 270, 400 270, 450 180 C 500 90, 550 90, 600 170 C 650 250, 720 250, 790 220" />
+        
+        <text x="805" y="226" text-anchor="start" class="path-label">MID-YEAR</text>
+        
+        <g class="airplane">
+            <path d="M15.42,12.31,9,8.5V4.25a1.25,1.25,0,0,0-2.5,0V8.5L.08,12.31a.5.5,0,0,0,.24.94H6.5V17.5l-2,1.5v1l3.5-1,3.5,1v-1l-2-1.5V13.25h6.18a.5.5,0,0,0,.24-.94Z" 
+                  fill="#000000" 
+                  transform="scale(2.5) translate(-8, -11)" />
+        </g>
+    </svg>
+</div>
+
+</body>
+</html>
