@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: transparent; 
+            margin: 0;
+            padding: 10px; /* Low padding to maximize widget space */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .animation-container {
+            width: 100%;
+            max-width: 100%; /* Forces it to dynamically fill the Docebo column width */
+            background: transparent;
+        }
+
+        svg {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .path-label {
+            font-family: 'Poppins', sans-serif;
+            font-size: 18px; /* High legibility on smaller screens */
+            font-weight: 600;
+            fill: #000000;
+            letter-spacing: 0.5px;
+        }
+
+        .flight-path {
+            stroke: #000000;
+            stroke-width: 3.5; 
+            stroke-dasharray: 6, 6; 
+            fill: none;
+        }
+
+        /* Tightly mapped 150px radius circle centered perfectly in a 700x400 box */
+        .airplane {
+            offset-path: path('M 200 200 A 150 150 0 1 1 500 200 A 150 150 0 1 1 200 200'); 
+            offset-rotate: auto 90deg; 
+            animation: fly 7s infinite linear;
+        }
+
+        @keyframes fly {
+            0% {
+                offset-distance: 0%;
+            }
+            100% {
+                offset-distance: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="animation-container">
+    <svg viewBox="0 0 700 400">
+        
+        <text x="185" y="207" text-anchor="end" class="path-label">YEAR-END</text>
+
+        <path class="flight-path" d="M 200 200 A 150 150 0 1 1 500 200 A 150 150 0 1 1 200 200" />
+        
+        <text x="515" y="207" text-anchor="start" class="path-label">MID-YEAR</text>
+        
+        <g class="airplane">
+            <path d="M15.42,12.31,9,8.5V4.25a1.25,1.25,0,0,0-2.5,0V8.5L.08,12.31a.5.5,0,0,0,.24.94H6.5V17.5l-2,1.5v1l3.5-1,3.5,1v-1l-2-1.5V13.25h6.18a.5.5,0,0,0,.24-.94Z" 
+                  fill="#000000" 
+                  transform="scale(3) translate(-8, -11)" />
+        </g>
+    </svg>
+</div>
+
+</body>
+</html>
