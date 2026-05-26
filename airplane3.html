@@ -19,7 +19,7 @@
             display: flex;
             flex-direction: row;
             width: 100%;
-            max-width: 1100px;
+            max-width: 1100px; /* Spans across your layout */
             background: transparent;
         }
 
@@ -29,9 +29,10 @@
             display: block;
         }
 
+        /* 1. Bumped up font size to match the larger loop */
         .path-label {
             font-family: 'Poppins', sans-serif;
-            font-size: 16px;
+            font-size: 20px;
             font-weight: 600;
             fill: #000000;
             letter-spacing: 1px;
@@ -39,16 +40,16 @@
 
         .flight-path {
             stroke: #000000;
-            stroke-width: 3;
-            stroke-dasharray: 5, 5; 
+            stroke-width: 3.5; /* Slightly thicker line for the larger scale */
+            stroke-dasharray: 6, 6; 
             fill: none;
         }
 
-        /* Updated offset-path to map a perfect 360-degree loop */
+        /* 2. Updated animation path to match the larger 160px radius circle coordinates */
         .airplane {
-            offset-path: path('M 400 175 A 100 100 0 1 1 600 175 A 100 100 0 1 1 400 175'); 
+            offset-path: path('M 340 250 A 160 160 0 1 1 660 250 A 160 160 0 1 1 340 250'); 
             offset-rotate: auto 90deg; 
-            animation: fly 6s infinite linear;
+            animation: fly 8s infinite linear; /* Eased to 8s since the plane has a longer track to cover */
         }
 
         @keyframes fly {
@@ -64,17 +65,18 @@
 <body>
 
 <div class="animation-container">
-    <svg viewBox="0 0 1000 350">
-        <text x="370" y="181" text-anchor="end" class="path-label">YEAR-END</text>
-
-        <path class="flight-path" d="M 400 175 A 100 100 0 1 1 600 175 A 100 100 0 1 1 400 175" />
+    <svg viewBox="0 0 1000 500">
         
-        <text x="630" y="181" text-anchor="start" class="path-label">MID-YEAR</text>
+        <text x="310" y="257" text-anchor="end" class="path-label">YEAR-END</text>
+
+        <path class="flight-path" d="M 340 250 A 160 160 0 1 1 660 250 A 160 160 0 1 1 340 250" />
+        
+        <text x="690" y="257" text-anchor="start" class="path-label">MID-YEAR</text>
         
         <g class="airplane">
             <path d="M15.42,12.31,9,8.5V4.25a1.25,1.25,0,0,0-2.5,0V8.5L.08,12.31a.5.5,0,0,0,.24.94H6.5V17.5l-2,1.5v1l3.5-1,3.5,1v-1l-2-1.5V13.25h6.18a.5.5,0,0,0,.24-.94Z" 
                   fill="#000000" 
-                  transform="scale(2.5) translate(-8, -11)" />
+                  transform="scale(3.2) translate(-8, -11)" />
         </g>
     </svg>
 </div>
