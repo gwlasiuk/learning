@@ -153,13 +153,13 @@
             </defs>
 
             <g mask="url(#donut-mask)">
-                <path class="slice" d="M50,50 L50,0 A50,50 0 0,1 89.092,18.825 Z" fill="#A66AFF" data-step="Stage 1" data-title="Attract" data-desc="Focus on job fit, employer brand, inclusive culture, and diversity. Streamline the career site, applications, and pre-interview processes to draw top talent." />
-                <path class="slice" d="M50,50 L89.092,18.825 A50,50 0 0,1 98.746,61.126 Z" fill="#FB5184" data-step="Stage 2" data-title="Recruit" data-desc="Design efficient, equitable interview processes. Ensure seamless systems, reliable follow-ups, and clear offer communication for a welcoming experience." />
-                <path class="slice" d="M50,50 L98.746,61.126 A50,50 0 0,1 71.694,95.048 Z" fill="#00C6E5" data-step="Stage 3" data-title="Onboard" data-desc="Provide necessary hardware, apps, and a welcome package. Foster human support and communities, anchored by a structured onboarding plan." />
-                <path class="slice" d="M50,50 L71.694,95.048 A50,50 0 0,1 28.306,95.048 Z" fill="#00B747" data-step="Stage 4" data-title="Engage" data-desc="Prioritize work-life blend, total rewards, and clear roles. Foster purpose, genuine relationships, meaningful internal comms, and community." />
-                <path class="slice" d="M50,50 L28.306,95.048 A50,50 0 0,1 1.254,61.126 Z" fill="#cddc28" data-step="Stage 5" data-title="Change" data-desc="Navigate shifts smoothly by clarifying remits and strategy. Ensure managers guide their teams through transitions with mindful, personalized training." />
-                <path class="slice" d="M50,50 L1.254,61.126 A50,50 0 0,1 10.908,18.825 Z" fill="#FF9626" data-step="Stage 6" data-title="Develop" data-desc="Create targeted development plans with continuous feedback and coaching. Encourage networking, ownership, and clear career paths." />
-                <path class="slice" d="M50,50 L10.908,18.825 A50,50 0 0,1 50,0 Z" fill="#FF4E51" data-step="Stage 7" data-title="Depart" data-desc="Manage exit feedback, knowledge transfer, and logistics. Celebrate individual support and recognition while providing a clear transition path." />
+                <path class="slice" d="M50,50 L50,0 A50,50 0 0,1 89.092,18.825 Z" fill="#A66AFF" data-step="Stage 1" data-title="Attract" data-desc="Focus on job fit, employer brand, inclusive culture, and diversity. Streamline the career site, applications, and pre-interview processes to draw top talent." data-link="" />
+                <path class="slice" d="M50,50 L89.092,18.825 A50,50 0 0,1 98.746,61.126 Z" fill="#FB5184" data-step="Stage 2" data-title="Recruit" data-desc="Design efficient, equitable interview processes. Ensure seamless systems, reliable follow-ups, and clear offer communication for a welcoming experience." data-link="https://tripadvisor.docebosaas.com/learn/dashboard/channel/234" />
+                <path class="slice" d="M50,50 L98.746,61.126 A50,50 0 0,1 71.694,95.048 Z" fill="#00C6E5" data-step="Stage 3" data-title="Onboard" data-desc="Provide necessary hardware, apps, and a welcome package. Foster human support and communities, anchored by a structured onboarding plan." data-link="https://tripadvisor.docebosaas.com/learn/dashboard/channel/233" />
+                <path class="slice" d="M50,50 L71.694,95.048 A50,50 0 0,1 28.306,95.048 Z" fill="#00B747" data-step="Stage 4" data-title="Engage" data-desc="Prioritize work-life blend, total rewards, and clear roles. Foster purpose, genuine relationships, meaningful internal comms, and community." data-link="https://tripadvisor.docebosaas.com/learn/dashboard/channel/235" />
+                <path class="slice" d="M50,50 L28.306,95.048 A50,50 0 0,1 1.254,61.126 Z" fill="#cddc28" data-step="Stage 5" data-title="Change" data-desc="Navigate shifts smoothly by clarifying remits and strategy. Ensure managers guide their teams through transitions with mindful, personalized training." data-link="https://tripadvisor.docebosaas.com/learn/dashboard/channel/236" />
+                <path class="slice" d="M50,50 L1.254,61.126 A50,50 0 0,1 10.908,18.825 Z" fill="#FF9626" data-step="Stage 6" data-title="Develop" data-desc="Create targeted development plans with continuous feedback and coaching. Encourage networking, ownership, and clear career paths." data-link="https://tripadvisor.docebosaas.com/learn/dashboard/channel/237" />
+                <path class="slice" d="M50,50 L10.908,18.825 A50,50 0 0,1 50,0 Z" fill="#FF4E51" data-step="Stage 7" data-title="Depart" data-desc="Manage exit feedback, knowledge transfer, and logistics. Celebrate individual support and recognition while providing a clear transition path." data-link="https://tripadvisor.docebosaas.com/learn/dashboard/channel/238" />
             </g>
 
             <circle cx="50" cy="50" r="21" fill="none" stroke="#1a202c" stroke-width="0.5" stroke-dasharray="2 1.5" class="trail-line" />
@@ -187,7 +187,7 @@
         <div class="step-badge" id="pop-step"></div>
         <h3 id="pop-title"></h3>
         <p id="pop-desc"></p>
-        <a href="#" class="btn">Explore Resources</a>
+        <a href="#" class="btn" id="pop-btn">Explore Resources</a>
     </div>
 </div>
 
@@ -195,12 +195,24 @@
     const popStep = document.getElementById('pop-step');
     const popTitle = document.getElementById('pop-title');
     const popDesc = document.getElementById('pop-desc');
+    const popBtn = document.getElementById('pop-btn');
     const slices = document.querySelectorAll('.slice');
 
     function updatePanel(slice) {
         popTitle.textContent = slice.dataset.title;
         popDesc.textContent = slice.dataset.desc;
         popStep.textContent = slice.dataset.step;
+        
+        // Dynamically update button text and link based on the selected section
+        if (slice.dataset.title === 'Attract') {
+            popBtn.textContent = "Your team's assigned recruiter will manage this stage";
+            popBtn.href = "javascript:void(0)"; 
+            popBtn.style.cursor = "default";
+        } else {
+            popBtn.textContent = "Explore Resources";
+            popBtn.href = slice.dataset.link;
+            popBtn.style.cursor = "pointer";
+        }
         
         const sliceColor = slice.getAttribute('fill');
         popStep.style.backgroundColor = sliceColor;
@@ -216,6 +228,14 @@
     slices.forEach(slice => {
         slice.addEventListener('mouseenter', () => {
             updatePanel(slice);
+        });
+        
+        // Make the pie section clickable
+        slice.addEventListener('click', () => {
+            const link = slice.dataset.link;
+            if (link) {
+                window.open(link, '_blank'); // Opens link in a new tab
+            }
         });
     });
 
