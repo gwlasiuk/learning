@@ -207,10 +207,12 @@
         if (slice.dataset.title === 'Attract') {
             popBtn.textContent = "Your team's assigned recruiter will manage this stage";
             popBtn.href = "javascript:void(0)"; 
+            popBtn.removeAttribute('target'); // Prevents opening a blank tab
             popBtn.style.cursor = "default";
         } else {
             popBtn.textContent = "Explore Resources";
             popBtn.href = slice.dataset.link;
+            popBtn.setAttribute('target', '_blank'); // Opens in a new tab
             popBtn.style.cursor = "pointer";
         }
         
