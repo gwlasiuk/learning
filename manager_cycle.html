@@ -207,7 +207,7 @@
         } else {
             popBtn.textContent = "Explore Resources";
             popBtn.href = slice.dataset.link;
-            popBtn.setAttribute('target', '_top'); // Bypasses iframe sandbox to move main window
+            popBtn.setAttribute('target', '_top'); 
             popBtn.style.cursor = "pointer";
         }
         
@@ -226,7 +226,6 @@
             updatePanel(slice);
         });
         
-        // Corrected variable name from 'target' to 'link'
         slice.addEventListener('click', () => {
             const link = slice.dataset.link;
             if (link) {
@@ -238,10 +237,6 @@
     if(slices.length > 0) {
         updatePanel(slices[0]);
     }
-    /* Push scroll-anchors down to clear the Docebo sticky header */
-[id^="doc-widget-"] {
-    scroll-margin-top: -110px !important;
-}
 </script>
 
 </body>
