@@ -187,7 +187,7 @@
         <div class="step-badge" id="pop-step"></div>
         <h3 id="pop-title"></h3>
         <p id="pop-desc"></p>
-        <a href="#" class="btn" id="pop-btn">Explore Resources</a>
+        <a href="javascript:void(0)" class="btn" id="pop-btn">Explore Resources</a>
     </div>
 </div>
 
@@ -198,28 +198,62 @@
     const popBtn = document.getElementById('pop-btn');
     const slices = document.querySelectorAll('.slice');
 
+    // Smooth scroll helper engineered for an embedded LMS iframe environment
+    function scrollToSection(targetUrl, event) {
+        if (!targetUrl || targetUrl === 'javascript:void(0)') return;
+        if (event) event.preventDefault();
+
+        try {
+            // 1. Reach outside the embedded iframe into the parent Docebo window
+            const parentDoc = window.parent.document;
+            
+            // 2. Extract the path (e.g., "/learn/dashboard/channel/234")
+            const urlObj = new URL(targetUrl, window.location.origin);
+            const path = urlObj.pathname;
+
+            // 3. Search the parent page for the Docebo carousel header link matching the channel URL
+            const targetAnchor = parentDoc.querySelector(`a[href="${targetUrl}"]`) || 
+                                 parentDoc.querySelector(`a[href$="${path}"]`);
+
+            if (targetAnchor) {
+                // Target the outer container wrapper so the heading isn't cut off by Docebo's top navigation bars
+                const targetSection = targetAnchor.closest('.single-widget, .widget-render-row, .ui-carousel') || targetAnchor;
+                targetSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                return;
+            }
+
+            // Fallback 1: If the target carousel isn't rendered on the active page, navigate normally in the parent window
+            window.parent.location.href = targetUrl;
+
+        } catch (error) {
+            // Fallback 2: If browser cross-origin sandbox security blocks parent frame access, open safely in a new tab
+            console.warn("Parent frame access blocked by iframe sandbox. Opening in new tab.", error);
+            window.open(targetUrl, '_blank');
+        }
+    }
+
     function updatePanel(slice) {
         popTitle.textContent = slice.dataset.title;
         popDesc.textContent = slice.dataset.desc;
         popStep.textContent = slice.dataset.step;
         
-        // Dynamically update button text and link based on the selected section
         if (slice.dataset.title === 'Attract') {
             popBtn.textContent = "Your team's assigned recruiter will manage this stage";
             popBtn.href = "javascript:void(0)"; 
-            popBtn.removeAttribute('target'); // Prevents opening a blank tab
+            popBtn.removeAttribute('target');
+            popBtn.dataset.scrollUrl = ""; 
             popBtn.style.cursor = "default";
         } else {
             popBtn.textContent = "Explore Resources";
-            popBtn.href = slice.dataset.link;
-            popBtn.setAttribute('target', '_blank'); // Opens in a new tab
+            popBtn.href = "javascript:void(0)"; // Override native navigation to prevent page jumps
+            popBtn.removeAttribute('target');
+            popBtn.dataset.scrollUrl = slice.dataset.link; // Store target link in data attribute for scroll handler
             popBtn.style.cursor = "pointer";
         }
         
         const sliceColor = slice.getAttribute('fill');
         popStep.style.backgroundColor = sliceColor;
         
-        // Ensure dark text on lighter colored badges (Yellow and Cyan)
         if(sliceColor.toUpperCase() === '#FFED0E' || sliceColor.toUpperCase() === '#00C6E5') {
             popStep.style.color = '#1a202c';
         } else {
@@ -227,16 +261,24 @@
         }
     }
 
+    // Attach smooth scroll handler to the Explore Resources button
+    popBtn.addEventListener('click', (e) => {
+        const targetUrl = popBtn.dataset.scrollUrl;
+        if (targetUrl) {
+            scrollToSection(targetUrl, e);
+        }
+    });
+
     slices.forEach(slice => {
         slice.addEventListener('mouseenter', () => {
             updatePanel(slice);
         });
         
-        // Make the pie section clickable
-        slice.addEventListener('click', () => {
+        // Attach smooth scroll handler directly to clicked wheel slices
+        slice.addEventListener('click', (e) => {
             const link = slice.dataset.link;
             if (link) {
-                window.open(link, '_blank'); // Opens link in a new tab
+                scrollToSection(link, e);
             }
         });
     });
