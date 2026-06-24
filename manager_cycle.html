@@ -2,24 +2,142 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Employee Experience Basecamp Wheel - Diagnostic</title>
+    <title>Employee Experience Basecamp Wheel - Responsive</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        body { margin: 0; display: flex; justify-content: center; align-items: center; min-height: 100vh; background: transparent; font-family: 'Poppins', sans-serif; }
-        .wrapper { display: flex; align-items: center; justify-content: center; gap: clamp(20px, 5vw, 50px); flex-wrap: wrap; width: 100%; padding: 20px; box-sizing: border-box; }
-        .wheel-container { width: clamp(320px, 45vw, 550px); height: clamp(320px, 45vw, 550px); position: relative; filter: drop-shadow(0px 8px 16px rgba(0,0,0,0.15)); }
-        svg { width: 100%; height: 100%; overflow: visible; }
-        .slice { cursor: pointer; transition: all 0.3s; stroke: #ffffff; stroke-width: 0.75; transform-origin: 50px 50px; }
-        .slice:hover { transform: scale(1.03); filter: brightness(1.08); }
-        .label { pointer-events: none; font-size: 3.5px; font-weight: 700; fill: #002b11; text-anchor: middle; dominant-baseline: middle; letter-spacing: 0.4px; }
-        .trail-line { pointer-events: none; transform-origin: 50px 50px; animation: spin 24s linear infinite; }
-        @keyframes spin { 100% { transform: rotate(360deg); } }
-        #ex-popup { width: clamp(300px, 35vw, 360px); display: flex; flex-direction: column; align-items: flex-start; background: #ffffff; padding: 35px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.12); border: 1px solid #e2e8f0; box-sizing: border-box; }
-        .step-badge { font-size: 11px; font-weight: 600; color: white; padding: 5px 12px; border-radius: 20px; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 0.5px; }
-        #pop-title { margin: 0 0 10px 0; font-size: 28px; color: #1a202c; }
-        #pop-desc { color: #4a5568; font-size: 14px; line-height: 1.6; margin: 0 0 24px 0; }
-        .btn { display: inline-block; padding: 12px 24px; background: #004D2C; color: white; text-decoration: none; border-radius: 8px; font-size: 14px; font-weight: 600; cursor: pointer; }
-        .ex-bg { fill: rgba(255, 255, 255, 0.85); }
+        /* Transparent body for Docebo embedding */
+        body { 
+            margin: 0; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            background: transparent;
+            font-family: 'Poppins', sans-serif; 
+        }
+
+        /* Added flex-wrap and clamp to make the layout responsive */
+        .wrapper { 
+            display: flex; 
+            align-items: center; 
+            justify-content: center;
+            gap: clamp(20px, 5vw, 50px); 
+            flex-wrap: wrap; 
+            width: 100%;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        /* INCREASED SIZE HERE: Adjusted clamp values to make the wheel larger */
+        .wheel-container { 
+            width: clamp(320px, 45vw, 550px); 
+            height: clamp(320px, 45vw, 550px); 
+            position: relative; 
+            filter: drop-shadow(0px 8px 16px rgba(0,0,0,0.15));
+        }
+        
+        svg { 
+            width: 100%; 
+            height: 100%; 
+            overflow: visible; 
+        }
+
+        .slice { 
+            cursor: pointer; 
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1); 
+            stroke: #ffffff; 
+            stroke-width: 0.75; 
+            transform-origin: 50px 50px;
+        }
+
+        .slice:hover { 
+            transform: scale(1.03);
+            filter: brightness(1.08);
+        }
+
+        .label { 
+            pointer-events: none; 
+            font-size: 3.5px; 
+            font-weight: 700; 
+            fill: #002b11; 
+            text-anchor: middle; 
+            dominant-baseline: middle; 
+            letter-spacing: 0.4px;
+            text-transform: uppercase;
+        }
+
+        .trail-line {
+            pointer-events: none;
+            transform-origin: 50px 50px;
+            animation: spin 24s linear infinite;
+        }
+
+        @keyframes spin { 
+            100% { transform: rotate(360deg); } 
+        }
+
+        /* Replaced fixed width with clamp */
+        #ex-popup { 
+            width: clamp(300px, 35vw, 360px); 
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            background: #ffffff;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.12);
+            border: 1px solid #e2e8f0;
+            box-sizing: border-box;
+        }
+
+        .step-badge {
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+        }
+
+        #pop-title { 
+            margin: 0 0 10px 0; 
+            font-size: 28px;
+            color: #1a202c;
+        }
+
+        #pop-desc { 
+            color: #4a5568; 
+            font-size: 14px;
+            line-height: 1.6;
+            margin: 0 0 24px 0;
+        }
+
+        /* Updated Dark Green Button */
+        .btn { 
+            display: inline-block; 
+            padding: 12px 24px; 
+            background: #004D2C; 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 8px; 
+            font-size: 14px; 
+            font-weight: 600;
+            transition: background 0.2s, border-color 0.2s;
+            border: 2px solid transparent;
+        }
+
+        .btn:hover {
+            background: #00331D;
+            border-color: #00C6E5;
+        }
+
+        .ex-bg {
+            fill: rgba(255, 255, 255, 0.85);
+        }
     </style>
 </head>
 <body>
@@ -33,17 +151,20 @@
                     <circle cx="50" cy="50" r="23" fill="black" />
                 </mask>
             </defs>
+
             <g mask="url(#donut-mask)">
-                <path class="slice" d="M50,50 L50,0 A50,50 0 0,1 89.092,18.825 Z" fill="#A66AFF" data-step="Stage 1" data-title="Attract" data-desc="Focus on job fit..." data-link="" />
-                <path class="slice" d="M50,50 L89.092,18.825 A50,50 0 0,1 98.746,61.126 Z" fill="#FB5184" data-step="Stage 2" data-title="Recruit" data-desc="Design efficient..." data-link="https://tripadvisor.docebosaas.com/learn/dashboard/channel/234" />
-                <path class="slice" d="M50,50 L98.746,61.126 A50,50 0 0,1 71.694,95.048 Z" fill="#00C6E5" data-step="Stage 3" data-title="Onboard" data-desc="Provide necessary..." data-link="https://tripadvisor.docebosaas.com/learn/dashboard/channel/233" />
-                <path class="slice" d="M50,50 L71.694,95.048 A50,50 0 0,1 28.306,95.048 Z" fill="#00B747" data-step="Stage 4" data-title="Engage" data-desc="Prioritize work-life..." data-link="https://tripadvisor.docebosaas.com/learn/dashboard/channel/235" />
-                <path class="slice" d="M50,50 L28.306,95.048 A50,50 0 0,1 1.254,61.126 Z" fill="#cddc28" data-step="Stage 5" data-title="Change" data-desc="Navigate shifts..." data-link="https://tripadvisor.docebosaas.com/learn/dashboard/channel/236" />
-                <path class="slice" d="M50,50 L1.254,61.126 A50,50 0 0,1 10.908,18.825 Z" fill="#FF9626" data-step="Stage 6" data-title="Develop" data-desc="Create targeted..." data-link="https://tripadvisor.docebosaas.com/learn/dashboard/channel/237" />
-                <path class="slice" d="M50,50 L10.908,18.825 A50,50 0 0,1 50,0 Z" fill="#FF4E51" data-step="Stage 7" data-title="Depart" data-desc="Manage exit..." data-link="https://tripadvisor.docebosaas.com/learn/dashboard/channel/238" />
+                <path class="slice" d="M50,50 L50,0 A50,50 0 0,1 89.092,18.825 Z" fill="#A66AFF" data-step="Stage 1" data-title="Attract" data-desc="Focus on job fit, employer brand, inclusive culture, and diversity. Streamline the career site, applications, and pre-interview processes to draw top talent." data-link="" />
+                <path class="slice" d="M50,50 L89.092,18.825 A50,50 0 0,1 98.746,61.126 Z" fill="#FB5184" data-step="Stage 2" data-title="Recruit" data-desc="Design efficient, equitable interview processes. Ensure seamless systems, reliable follow-ups, and clear offer communication for a welcoming experience." data-link="https://tripadvisor.docebosaas.com/learn/dashboard/channel/234" />
+                <path class="slice" d="M50,50 L98.746,61.126 A50,50 0 0,1 71.694,95.048 Z" fill="#00C6E5" data-step="Stage 3" data-title="Onboard" data-desc="Provide necessary hardware, apps, and a welcome package. Foster human support and communities, anchored by a structured onboarding plan." data-link="https://tripadvisor.docebosaas.com/learn/dashboard/channel/233" />
+                <path class="slice" d="M50,50 L71.694,95.048 A50,50 0 0,1 28.306,95.048 Z" fill="#00B747" data-step="Stage 4" data-title="Engage" data-desc="Prioritize work-life blend, total rewards, and clear roles. Foster purpose, genuine relationships, meaningful internal comms, and community." data-link="https://tripadvisor.docebosaas.com/learn/dashboard/channel/235" />
+                <path class="slice" d="M50,50 L28.306,95.048 A50,50 0 0,1 1.254,61.126 Z" fill="#cddc28" data-step="Stage 5" data-title="Change" data-desc="Navigate shifts smoothly by clarifying remits and strategy. Ensure managers guide their teams through transitions with mindful, personalized training." data-link="https://tripadvisor.docebosaas.com/learn/dashboard/channel/236" />
+                <path class="slice" d="M50,50 L1.254,61.126 A50,50 0 0,1 10.908,18.825 Z" fill="#FF9626" data-step="Stage 6" data-title="Develop" data-desc="Create targeted development plans with continuous feedback and coaching. Encourage networking, ownership, and clear career paths." data-link="https://tripadvisor.docebosaas.com/learn/dashboard/channel/237" />
+                <path class="slice" d="M50,50 L10.908,18.825 A50,50 0 0,1 50,0 Z" fill="#FF4E51" data-step="Stage 7" data-title="Depart" data-desc="Manage exit feedback, knowledge transfer, and logistics. Celebrate individual support and recognition while providing a clear transition path." data-link="https://tripadvisor.docebosaas.com/learn/dashboard/channel/238" />
             </g>
+
             <circle cx="50" cy="50" r="21" fill="none" stroke="#1a202c" stroke-width="0.5" stroke-dasharray="2 1.5" class="trail-line" />
             <circle cx="50" cy="50" r="18" fill="none" stroke="#cbd5e1" stroke-width="0.4" stroke-dasharray="1 2" class="trail-line" style="animation-direction: reverse; animation-duration: 40s;" />
+
             <text class="label" x="65.6" y="17.6" transform="rotate(25.7 65.6 17.6)">ATTRACT</text>
             <text class="label" x="85.1" y="42.0" transform="rotate(77.1 85.1 42.0)">RECRUIT</text>
             <text class="label" x="78.1" y="72.5" transform="rotate(-51.4 78.1 72.5)" fill="#1a202c">ONBOARD</text>
@@ -51,7 +172,14 @@
             <text class="label" x="21.9" y="72.5" transform="rotate(51.4 21.9 72.5)" fill="#1a202c">CHANGE</text> 
             <text class="label" x="14.9" y="42.0" transform="rotate(282.9 14.9 42.0)">DEVELOP</text>
             <text class="label" x="34.4" y="17.6" transform="rotate(334.3 34.4 17.6)">DEPART</text>
+            
             <circle cx="50" cy="50" r="8" class="ex-bg" />
+            
+            <g transform="translate(44, 44) scale(0.5)" pointer-events="none">
+                <circle cx="12" cy="12" r="10" fill="none" stroke="#1a202c" stroke-width="1.5"/>
+                <polygon points="12,3 15,12 12,21 9,12" fill="#1a202c"/>
+                <circle cx="12" cy="12" r="2" fill="#ffffff"/>
+            </g>
         </svg>
     </div>
 
@@ -59,7 +187,7 @@
         <div class="step-badge" id="pop-step"></div>
         <h3 id="pop-title"></h3>
         <p id="pop-desc"></p>
-        <a href="javascript:void(0);" class="btn" id="pop-btn">Explore Resources</a>
+        <a href="#" class="btn" id="pop-btn">Explore Resources</a>
     </div>
 </div>
 
@@ -74,53 +202,48 @@
         popTitle.textContent = slice.dataset.title;
         popDesc.textContent = slice.dataset.desc;
         popStep.textContent = slice.dataset.step;
-        popBtn.textContent = slice.dataset.title === 'Attract' ? "Recruiter Managed" : "Explore Resources";
-        popStep.style.backgroundColor = slice.getAttribute('fill');
-    }
-
-    function runDiagnostic(e, url, title) {
-        e.preventDefault();
         
-        if(!url) {
-            alert(`"${title}" has no URL attached.`);
-            return;
+        // Dynamically update button text and link based on the selected section
+        if (slice.dataset.title === 'Attract') {
+            popBtn.textContent = "Your team's assigned recruiter will manage this stage";
+            popBtn.href = "javascript:void(0)"; 
+            popBtn.removeAttribute('target'); // Prevents opening a blank tab
+            popBtn.style.cursor = "default";
+        } else {
+            popBtn.textContent = "Explore Resources";
+            popBtn.href = slice.dataset.link;
+            popBtn.setAttribute('target', '_blank'); // Opens in a new tab
+            popBtn.style.cursor = "pointer";
         }
-
-        alert(`TEST 1/3 PASSED: Your click was registered! \n\nNow attempting to poke our head out of the Docebo iframe...`);
-
-        try {
-            const parentDoc = window.parent.document;
-            const pageTitle = parentDoc.title;
-            
-            alert(`TEST 2/3 PASSED: We broke out! \nThe main page title is: "${pageTitle}"\n\nNow searching the main page for a channel matching: ${url}`);
-
-            // Grab just the end of the URL (e.g. "channel/234") to be safe
-            const endpoint Snippet = url.split('/').slice(-2).join('/');
-            const foundSection = parentDoc.querySelector(`a[href*="${endpointSnippet}"]`);
-
-            if (foundSection) {
-                alert(`TEST 3/3 PASSED! Found the widget header. Scrolling now...`);
-                foundSection.closest('.ui-carousel, .widget-render-row, .single-widget').scrollIntoView({ behavior: 'smooth' });
-            } else {
-                alert(`FAILED AT STEP 3: We can see the main webpage, but Docebo's HTML doesn't contain any element with the link "${endpointSnippet}".`);
-            }
-
-        } catch (err) {
-            alert(`FAILED AT STEP 2: Docebo's security slammed the door shut.\n\nError: "${err.message}"`);
+        
+        const sliceColor = slice.getAttribute('fill');
+        popStep.style.backgroundColor = sliceColor;
+        
+        // Ensure dark text on lighter colored badges (Yellow and Cyan)
+        if(sliceColor.toUpperCase() === '#FFED0E' || sliceColor.toUpperCase() === '#00C6E5') {
+            popStep.style.color = '#1a202c';
+        } else {
+            popStep.style.color = '#ffffff';
         }
     }
 
     slices.forEach(slice => {
-        slice.addEventListener('mouseenter', () => updatePanel(slice));
-        slice.addEventListener('click', (e) => runDiagnostic(e, slice.dataset.link, slice.dataset.title));
+        slice.addEventListener('mouseenter', () => {
+            updatePanel(slice);
+        });
+        
+        // Make the pie section clickable
+        slice.addEventListener('click', () => {
+            const link = slice.dataset.link;
+            if (link) {
+                window.open(link, '_blank'); // Opens link in a new tab
+            }
+        });
     });
 
-    popBtn.addEventListener('click', (e) => {
-        const currentSlice = Array.from(slices).find(s => s.dataset.title === popTitle.textContent);
-        if(currentSlice) runDiagnostic(e, currentSlice.dataset.link, currentSlice.dataset.title);
-    });
-
-    if(slices.length > 0) updatePanel(slices[0]);
+    if(slices.length > 0) {
+        updatePanel(slices[0]);
+    }
 </script>
 
 </body>
