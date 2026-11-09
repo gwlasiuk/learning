@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light">
-<title>2026 Year-End Timeline</title>
+<title>2026 Year-End Timeline for Employees</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@600;700;800&family=Work+Sans:wght@400;500;600&display=swap">
 <style>
 :root{
@@ -33,10 +33,8 @@ button{font-family:inherit}
 
 /* controls */
 .controls{display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center;margin-bottom:12px}
-.who{display:inline-flex;gap:8px}
-.who button{border:2px solid var(--ink);background:transparent;color:var(--ink);font:700 15px var(--head);padding:5px 18px;border-radius:999px;cursor:pointer;transition:background .2s}
-.who button[data-view="employees"][aria-pressed="true"]{background:var(--emp)}
-.who button[data-view="leaders"][aria-pressed="true"]{background:var(--mgr)}
+.badge{display:inline-flex;align-items:center;gap:5px;background:var(--emp);color:#000;font:500 15px var(--head);padding:5px 18px;border-radius:999px}
+.badge strong{font-weight:700}
 .chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .chip{display:inline-flex;align-items:center;gap:7px;padding:4px 12px 4px 8px;border-radius:999px;border:1.5px solid var(--line-strong);background:transparent;color:var(--muted);font:500 13px var(--body);cursor:pointer;transition:background .2s,border-color .2s}
 .chip .bub{background:transparent}
@@ -81,7 +79,7 @@ button{font-family:inherit}
 
 .lanes{position:relative;z-index:2}
 .lane{position:relative;height:var(--lane)}
-.lane-label{position:absolute;left:12px;top:50%;translate:0 -50%;display:flex;align-items:center;gap:7px;font:600 12.5px/1.2 var(--body);color:var(--muted);transition:opacity .3s}
+.lane-label{position:absolute;left:8px;padding:2px 6px;border-radius:8px;background:rgba(255,255,255,.75);top:50%;translate:0 -50%;display:flex;align-items:center;gap:7px;font:600 12.5px/1.2 var(--body);color:var(--muted);transition:opacity .3s}
 .lane-label small{display:none;font-weight:400;font-size:11.5px}
 .lane.dim .lane-label{opacity:.4}
 .lane.na .lane-label{opacity:.55}
@@ -93,6 +91,7 @@ button{font-family:inherit}
 .bar:hover{filter:brightness(.96)}
 .bar:focus-visible{outline:3px solid #000;outline-offset:-4px}
 .leg.selected .bar{box-shadow:inset 0 0 0 3px #000}
+.bar.open .t{white-space:nowrap}
 .bar.open{-webkit-mask-image:linear-gradient(90deg,#000 60%,transparent);mask-image:linear-gradient(90deg,#000 60%,transparent)}
 .in{display:flex;flex-direction:column;justify-content:center;gap:1px;height:100%;padding:3px 10px;overflow:hidden}
 .t{font:600 12.5px/1.2 var(--body)}
@@ -114,7 +113,7 @@ button{font-family:inherit}
 .tag-winter svg{color:#2F6FA8}
 .tag-blackout{background:#fff;color:#000;border:1px solid var(--line-strong);--stem:var(--line-strong)}
 
-.today{position:absolute;top:0;bottom:var(--foot);width:2px;margin-left:-1px;background:#000;z-index:5;pointer-events:none}
+.today{position:absolute;top:0;bottom:var(--foot);width:2px;margin-left:-1px;background:#000;z-index:1;pointer-events:none}
 .today::before{content:"Today";position:absolute;top:3px;left:50%;translate:-50% 0;background:#000;color:#fff;font:600 10.5px var(--head);padding:1px 7px;border-radius:999px}
 .empty{margin:0;padding:30px 20px;text-align:center;color:var(--muted)}
 .noanim *{transition:none!important}
@@ -155,13 +154,10 @@ button{font-family:inherit}
 </svg>
 
 <main class="page">
-  <h1 class="sr">2026 Year-End Timeline for <span id="aud">Managers</span></h1>
+  <h1 class="sr">2026 Year-End Timeline for <span id="aud">Employees</span></h1>
 
   <div class="controls">
-    <div class="who" role="group" aria-label="Whose timeline">
-      <button type="button" data-view="employees" aria-pressed="false">Employees</button>
-      <button type="button" data-view="leaders" aria-pressed="true">Managers</button>
-    </div>
+    <span class="badge"><strong>Employee</strong> Year-End Timeline</span>
     <div class="chips" id="chips" role="group" aria-label="Filter by event type"></div>
     <div class="mode" role="group" aria-label="Layout">
       <button type="button" data-mode="timeline" aria-pressed="true">Timeline</button>
@@ -195,6 +191,7 @@ button{font-family:inherit}
 <script>
 (function(){
 'use strict';
+var VIEW='employees';
 var $=function(s,r){return (r||document).querySelector(s)};
 var $$=function(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))};
 var DAY=864e5, BASE=Date.UTC(2026,10,1), N=92;
@@ -207,15 +204,16 @@ function rngT(a,b){var x=new Date(BASE+a*DAY),y=new Date(BASE+b*DAY);return x.ge
 function wk(a,b){var c=0;for(var i=a;i<=b;i++){var g=new Date(BASE+i*DAY).getUTCDay();if(g>0&&g<6)c++}return c}
 
 var BOTH=['employees','leaders'], LEAD=['leaders'];
-var ITEMS=[
+var ALLITEMS=[
  {id:'feedback',short:'Feedback',cat:'feedback',title:'Submit feedback in Workday',label:'Submit feedback',s:'2026-11-16',e:'2026-12-04',aud:BOTH},
  {id:'self',short:'Self reviews',cat:'written',title:'Self reviews open in Workday',label:'Self reviews open',s:'2026-11-16',e:'2026-12-04',aud:BOTH},
- {id:'draft',short:'Manager drafts',cat:'written',title:'Managers draft written reviews in Workday*',label:'Managers draft written reviews*',s:'2026-12-07',e:'2027-01-06',aud:BOTH,note:'The asterisk refers to the note below about who gets a formal review.'},
+ {id:'draft',short:'Manager drafts',cat:'written',title:'Managers draft written reviews in Workday*',label:'Managers draft written reviews*',s:'2026-12-07',e:'2027-01-06',aud:BOTH,who:'Managers',note:'The asterisk refers to the note below about who gets a formal review.'},
  {id:'prelim',short:'Prelim ratings',cat:'calibration',title:'Prelim ratings in Workday',label:'Prelim ratings',s:'2026-12-07',e:'2026-12-11',aud:LEAD},
  {id:'calib',short:'Calibrations',cat:'calibration',title:'BU performance calibrations & promo approvals',label:'BU calibrations & promo approvals',s:'2026-12-14',e:'2027-01-06',aud:LEAD},
  {id:'promo',short:'Promo recs',cat:'comp',title:'Promo recs in Workday',label:'Promo recs',s:'2026-11-16',e:'2026-12-04',aud:LEAD},
  {id:'comp',short:'Compensation planning',cat:'comp',title:'Compensation Planning',label:'Compensation Planning',s:'2027-01-16',e:'2027-01-31',aud:LEAD,open:true,datesText:'Dates TBC',note:'More information will be shared with leaders who will be directly involved in compensation planning.'}
 ];
+var ITEMS=ALLITEMS.filter(function(i){return i.aud.indexOf(VIEW)>-1});
 var BREAKS=[
  {id:'tg',kind:'break',cat:'breaks',type:'autumn',title:'Thanksgiving (US)',s:'2026-11-26',e:'2026-11-27',aud:BOTH,label:'Time off',who:'US only',col:'var(--autumn-2)'},
  {id:'holiday',kind:'break',cat:'breaks',type:'winter',title:'Holiday break',s:'2026-12-25',e:'2027-01-01',aud:BOTH,label:'Time off',who:'Everyone',col:'var(--winter-3)'},
@@ -225,9 +223,11 @@ var ALL=ITEMS.concat(BREAKS), byId={};
 ALL.forEach(function(i){byId[i.id]=i});
 var LANES=[{cat:'feedback',label:'Feedback'},{cat:'written',label:'Written drafts'},{cat:'calibration',label:'Calibrations'},{cat:'comp',label:'Compensation'}];
 var CHIPS=[{k:'feedback',l:'Feedback'},{k:'written',l:'Written drafts'},{k:'calibration',l:'Calibrations'},{k:'comp',l:'Compensation'},{k:'breaks',l:'Breaks'}];
+LANES=LANES.filter(function(L){return ITEMS.some(function(i){return i.cat===L.cat})});
+CHIPS=CHIPS.filter(function(c){return c.k==='breaks'||LANES.some(function(L){return L.cat===c.k})});
 var CATLAB={feedback:'Feedback',written:'Written drafts',calibration:'Calibrations',comp:'Compensation'};
 
-var state={view:'leaders',mode:'timeline',active:{feedback:true,written:true,calibration:true,comp:true,breaks:true},sel:null};
+var state={view:VIEW,mode:'timeline',active:{feedback:true,written:true,calibration:true,comp:true,breaks:true},sel:null};
 var board=$('#board');
 
 function visible(it){return it.aud.indexOf(state.view)>-1&&state.active[it.cat]}
@@ -379,10 +379,8 @@ function postHeight(){
 }
 
 function updateUI(){
-  $$('[data-view]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.view===state.view)});
   $$('[data-mode]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.mode===state.mode)});
-  $('#aud').textContent=state.view==='leaders'?'Managers':'Employees';
-  renderChips();
+    renderChips();
   $('#stage').hidden=state.mode!=='timeline';
   $('#listview').hidden=state.mode!=='list';
   renderList();
@@ -391,8 +389,6 @@ function updateUI(){
 }
 
 document.addEventListener('click',function(e){
-  var v=e.target.closest('[data-view]');
-  if(v){state.view=v.dataset.view;updateUI();return}
   var m=e.target.closest('[data-mode]');
   if(m){state.mode=m.dataset.mode;updateUI();return}
   var c=e.target.closest('.chip');
@@ -403,16 +399,9 @@ document.addEventListener('click',function(e){
 });
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&state.sel){state.sel=null;sync()}});
 
-function readHash(){
-  var h=(location.hash||'').replace('#','');
-  if(h==='employees'||h==='leaders'||h==='managers'){state.view=h==='managers'?'leaders':h;return true}
-  return false;
-}
-window.addEventListener('hashchange',function(){if(readHash())updateUI()});
 window.addEventListener('resize',postHeight);
 
 build();
-readHash();
 if(window.innerWidth<700)state.mode='list';
 board.classList.add('noanim');
 updateUI();
