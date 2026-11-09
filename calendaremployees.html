@@ -130,6 +130,32 @@ button{font-family:inherit}
 
 .footnote{margin:10px 2px 0;font-size:12px;line-height:1.45;color:var(--muted)}
 
+
+/* manager calendar link */
+.cta{display:flex;align-items:center;justify-content:center;gap:14px;width:min(100%,500px);margin:20px auto 0;padding:9px 16px 9px 24px;background:var(--mgr);color:#000;border:2px solid #000;border-radius:999px;font:500 15px var(--head);text-decoration:none;animation:ring 3.6s ease-out infinite}
+.cta strong{font-weight:700}
+.cta:hover{background:#fff;animation-play-state:paused}
+.cta:hover .fly svg{animation-duration:1.4s}
+.fly{position:relative;width:90px;height:26px;overflow:hidden;flex:none}
+.fly svg{position:absolute;top:3px;left:0;width:20px;height:20px;fill:#000;rotate:90deg;animation:take 3.6s ease-in-out infinite}
+.trail{position:absolute;left:0;top:50%;width:100%;height:2px;margin-top:-1px;background:repeating-linear-gradient(90deg,#000 0 3px,transparent 3px 8px);opacity:.45;transform-origin:left;animation:trail 3.6s ease-in-out infinite}
+@keyframes take{
+  0%{translate:-6px 4px;opacity:0}
+  12%{opacity:1}
+  55%{translate:34px 0;opacity:1}
+  85%,100%{translate:96px -8px;opacity:0}
+}
+@keyframes trail{
+  0%{scale:0 1;opacity:0}
+  15%{opacity:.45}
+  55%{scale:.55 1}
+  85%,100%{scale:1 1;opacity:0}
+}
+@keyframes ring{
+  0%,55%{box-shadow:0 0 0 0 rgba(255,61,219,.55)}
+  90%,100%{box-shadow:0 0 0 7px rgba(255,61,219,0)}
+}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{transition-duration:.01ms!important;animation:none!important}
   .leaf,.flake{top:var(--y,40%)}
@@ -138,6 +164,7 @@ button{font-family:inherit}
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-plane" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></symbol>
   <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M12 1L14 6L18 4L17 9L22 9L18.5 12.5L21 16L15.5 15.5L16 20L12.8 18L12.8 23L11.2 23L11.2 18L8 20L8.5 15.5L3 16L5.5 12.5L2 9L7 9L6 4L10 6Z"/></symbol>
   <symbol id="i-flake" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 2v20M3.34 7l17.32 10M3.34 17L20.66 7"/><path d="M9 4l3 2.5L15 4M9 20l3-2.5 3 2.5"/></g></symbol>
 </svg>
@@ -167,6 +194,10 @@ button{font-family:inherit}
   </section>
 
   <p class="footnote">*Employees hired before Nov 1, 2026 will participate in the formal year-end review, ensuring sufficient time for a fair assessment. For those who joined Nov 1 or after, managers are expected to hold an informal check-in focused on early feedback and development.</p>
+  <a class="cta" href="https://tripadvisor.docebosaas.com/pages/364/year-end-calendar-managers" target="_top" rel="noopener">
+    <span><strong>Managers:</strong> view the manager calendar</span>
+    <span class="fly" aria-hidden="true"><i class="trail"></i><svg><use href="#i-plane"/></svg></span>
+  </a>
 </main>
 
 <script>
