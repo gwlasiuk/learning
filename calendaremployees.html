@@ -23,6 +23,7 @@
 *,*::before,*::after{box-sizing:border-box}
 [hidden]{display:none!important}
 html,body{margin:0;background:transparent}
+html{overflow-y:hidden}
 body{color:var(--ink);font-family:var(--body);font-size:14px;line-height:1.4;-webkit-font-smoothing:antialiased}
 button{font-family:inherit}
 :focus-visible{outline:3px solid var(--focus);outline-offset:2px}
@@ -43,9 +44,6 @@ button{font-family:inherit}
 .chip[data-k="breaks"]{--cat:#7DB9E6}
 .chip[data-k="breaks"][aria-pressed="true"] .bub{background:linear-gradient(90deg,var(--autumn-2) 50%,var(--winter-3) 50%)}
 .linkbtn{border:0;background:none;color:var(--ink);font:600 13px var(--body);text-decoration:underline;text-underline-offset:3px;cursor:pointer;padding:4px}
-.mode{margin-left:auto;display:inline-flex;gap:4px;padding:3px;border:2px solid var(--ink);border-radius:999px}
-.mode button{border:0;background:transparent;color:var(--ink);font:700 12.5px var(--head);padding:3px 12px;border-radius:999px;cursor:pointer}
-.mode button[aria-pressed="true"]{background:var(--lime)}
 
 /* board */
 .scroller{overflow-x:auto;border-radius:16px;background:var(--paper);box-shadow:0 1px 8px rgba(0,0,0,.15)}
@@ -129,15 +127,6 @@ button{font-family:inherit}
 .pill{display:inline-flex;align-items:center;font-size:12px;padding:1px 10px;border-radius:999px;background:color-mix(in srgb,var(--cat,#ccc) 35%,#fff)}
 .pill.plain{background:transparent;border:1px solid var(--line-strong);color:var(--muted)}
 
-.agenda{list-style:none;margin:0;padding:0;border-radius:16px;background:var(--paper);box-shadow:0 1px 8px rgba(0,0,0,.15);overflow:hidden}
-.row{display:grid;grid-template-columns:120px 1fr auto;gap:4px 16px;padding:10px 16px;border-top:1px solid var(--line);align-items:start}
-.row:first-child{border-top:0}
-.row-when strong{display:block;font:700 14px var(--head)}
-.row-when span{font-size:12.5px;color:var(--muted)}
-.row-title{display:block;font:600 14px var(--body);margin-bottom:3px}
-.row-note{display:block;margin-top:2px;font-size:12.5px;color:var(--muted)}
-.row-len{font-size:12.5px;color:var(--muted);white-space:nowrap}
-@media (max-width:640px){.row{grid-template-columns:1fr}.mode{margin-left:0}}
 
 .footnote{margin:10px 2px 0;font-size:12px;line-height:1.45;color:var(--muted)}
 
@@ -159,10 +148,6 @@ button{font-family:inherit}
   <div class="controls">
     <span class="badge"><strong>Employee</strong> Year-End Timeline</span>
     <div class="chips" id="chips" role="group" aria-label="Filter by event type"></div>
-    <div class="mode" role="group" aria-label="Layout">
-      <button type="button" data-mode="timeline" aria-pressed="true">Timeline</button>
-      <button type="button" data-mode="list" aria-pressed="false">List</button>
-    </div>
   </div>
 
   <section id="stage" aria-label="Timeline">
@@ -179,10 +164,6 @@ button{font-family:inherit}
       </div>
     </div>
     <div class="detail" id="detail" aria-live="polite"></div>
-  </section>
-
-  <section id="listview" aria-label="Event list" hidden>
-    <ol class="agenda" id="agenda"></ol>
   </section>
 
   <p class="footnote">*Employees hired before Nov 1, 2026 will participate in the formal year-end review, ensuring sufficient time for a fair assessment. For those who joined Nov 1 or after, managers are expected to hold an informal check-in focused on early feedback and development.</p>
@@ -348,16 +329,6 @@ function renderDetail(){
   el.innerHTML='<div class="d-main"><strong>'+it.title+'</strong><span class="when">'+when+span+'</span><span class="pill">'+cat+'</span><span class="pill plain">'+whoText(it)+'</span></div>'+(it.note?'<p class="note">'+it.note+'</p>':'');
 }
 
-function renderList(){
-  var rows=ALL.filter(visible).sort(function(a,b){return iso(a.s)-iso(b.s)||iso(a.e)-iso(b.e)});
-  $('#agenda').innerHTML=rows.length?rows.map(function(it){
-    var a=iso(it.s),e=iso(it.e),len=e-a+1;
-    var cat=it.kind==='break'?it.label:CATLAB[it.cat];
-    var when=it.datesText?'<strong>After Jan 15</strong><span>dates TBC</span>':'<strong>'+lab(a)+'</strong>'+(e!==a?'<span>to '+lab(e)+'</span>':'');
-    return '<li class="row" style="--cat:'+colOf(it)+'"><div class="row-when">'+when+'</div><div><span class="row-title">'+it.title+'</span><span class="pill">'+cat+'</span> <span class="pill plain">'+whoText(it)+'</span>'+(it.note&&it.id!=='draft'?'<span class="row-note">'+it.note+'</span>':'')+'</div><div class="row-len">'+(it.datesText?'':len+(len===1?' day':' days'))+'</div></li>';
-  }).join(''):'<li class="row"><div></div><div class="row-note">Nothing to show. Turn an event type back on above.</div></li>';
-}
-
 function renderChips(){
   var box=$('#chips');
   if(!box.children.length){
@@ -379,18 +350,12 @@ function postHeight(){
 }
 
 function updateUI(){
-  $$('[data-mode]').forEach(function(b){b.setAttribute('aria-pressed',b.dataset.mode===state.mode)});
     renderChips();
-  $('#stage').hidden=state.mode!=='timeline';
-  $('#listview').hidden=state.mode!=='list';
-  renderList();
-  if(state.mode==='timeline')sync();
+  sync();
   postHeight();
 }
 
 document.addEventListener('click',function(e){
-  var m=e.target.closest('[data-mode]');
-  if(m){state.mode=m.dataset.mode;updateUI();return}
   var c=e.target.closest('.chip');
   if(c){state.active[c.dataset.k]=!state.active[c.dataset.k];updateUI();return}
   if(e.target.closest('#reset')){Object.keys(state.active).forEach(function(k){state.active[k]=true});updateUI();return}
@@ -402,7 +367,6 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'&&state.sel){
 window.addEventListener('resize',postHeight);
 
 build();
-if(window.innerWidth<700)state.mode='list';
 board.classList.add('noanim');
 updateUI();
 void board.offsetWidth;
