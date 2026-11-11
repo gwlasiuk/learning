@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>2026 Year-End Timeline</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Work+Sans:wght@400;500;600&display=swap">
+<style>
+html, body { margin: 0; background: transparent; }
+body { padding: 6px; }
+.perf {
+  --head: 'Poppins', 'Segoe UI', system-ui, sans-serif;
+  --body: 'Work Sans', 'Segoe UI', system-ui, sans-serif;
+  --muted: #4d4d4d;
+  --line: rgba(0,0,0,.12);
+  --line-strong: rgba(0,0,0,.35);
+  max-width: 1400px; margin: 0 auto;
+  font-family: var(--body); color: #333; -webkit-font-smoothing: antialiased; color-scheme: light;
+}
+.perf *, .perf *::before, .perf *::after { box-sizing: border-box; }
+.perf [hidden] { display: none !important; }
+.perf :focus-visible { outline: 3px solid #000; outline-offset: 2px; }
+.perf .section-title {
+  display: inline-block; margin: 0 0 18px; padding: 8px 24px; border-radius: 50px;
+  background: #ffd54f; color: #222; font: 700 18px/1.4 var(--head);
+  box-shadow: 0 4px 12px rgba(0,0,0,.06);
+}
+
+/* ============================================================
+   YEAR-END TIMELINE
+   ============================================================ */
+.perf .yet {
+  --emp: #00e65c;
+  --mgr: #ff3ddb;
+  --c-feedback: #ff9a2b;
+  --c-written: #ffe95c;
+  --c-calibration: #c7f25a;
+  --c-comp: #8ee3f8;
+  --paper: rgba(255,255,255,.62);
+  --autumn-1: #f59f00; --autumn-2: #e8590c; --autumn-3: #9c2a12;
+  --winter-1: #cbe8fa; --winter-2: #8ec5ee; --winter-3: #5aa2db;
+  --hatch: rgba(0,0,0,.14);
+  --foot: 70px;
+  --lane: 84px;
+
+  font-size: 16px;
+  line-height: 1.4;
+  margin-bottom: 8px;
+
+  button { font-family: inherit; }
+
+  .bub {
+    display: inline-block; width: 12px; height: 12px; flex: none;
+    border-radius: 50%;
+    background: var(--cat, var(--emp));
+    border: 2px solid color-mix(in srgb, var(--cat, var(--emp)) 40%, #000);
+  }
+
+  /* ---------- controls ---------- */
+  .controls { display: flex; flex-wrap: wrap; gap: 8px 14px; align-items: center; margin-bottom: 12px; }
+  .badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    padding: 5px 18px; border-radius: 999px;
+    background: var(--emp); color: #000; font: 500 18px var(--head);
+    strong { font-weight: 700; }
+  }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 7px;
+    padding: 4px 12px 4px 8px; border-radius: 999px;
+    border: 1.5px solid var(--line-strong); background: transparent;
+    color: var(--muted); font: 500 15px var(--body); cursor: pointer;
+    transition: background .2s, border-color .2s;
+
+    .bub { background: transparent; }
+    &[aria-pressed="true"] {
+      background: color-mix(in srgb, var(--cat) 35%, #fff);
+      color: #000; border-color: #000;
+      .bub { background: var(--cat); }
+    }
+    &[data-k="breaks"] { --cat: #7db9e6; }
+    &[data-k="breaks"][aria-pressed="true"] .bub {
+      background: linear-gradient(90deg, var(--autumn-2) 50%, var(--winter-3) 50%);
+    }
+  }
+  .linkbtn {
+    border: 0; background: none; padding: 4px; cursor: pointer;
+    color: #000; font: 600 13px var(--body);
+    text-decoration: underline; text-underline-offset: 3px;
+  }
+
+  /* ---------- board ---------- */
+  .scroller { overflow-x: auto; border-radius: 16px; background: var(--paper); box-shadow: 0 1px 8px rgba(0,0,0,.15); }
+  .board { position: relative; min-width: 1000px; }
+  .months { display: flex; height: 44px; border-bottom: 1px solid var(--line); }
+  .month { display: flex; align-items: center; padding-left: 12px; border-left: 1px solid var(--line); font: 700 17px var(--head); color: #000; }
+  .month:first-child { border-left: 0; }
+  .inner { position: relative; }
+  .grid { position: absolute; inset: 0; z-index: 0; pointer-events: none; }
+  .gl { position: absolute; top: 0; bottom: 0; width: 1px; background: var(--line); opacity: .7; }
+  .gl.m { opacity: 1; }
+  .scale { position: relative; height: 26px; z-index: 1; }
+  .sl { position: absolute; bottom: 3px; padding-left: 5px; font: 500 13px var(--body); color: var(--muted); font-variant-numeric: tabular-nums; }
+
+  /* break bands */
+  .bands { position: absolute; inset: 0 0 var(--foot) 0; z-index: 1; pointer-events: none; }
+  .band { position: absolute; top: 0; bottom: 0; overflow: hidden; opacity: 0; transition: opacity .3s; }
+  .band.show { opacity: 1; pointer-events: auto; cursor: pointer; }
+  .band.autumn { background: linear-gradient(180deg, var(--autumn-1), var(--autumn-2) 50%, var(--autumn-3)); }
+  .band.winter { background: linear-gradient(180deg, var(--winter-1), var(--winter-2) 55%, var(--winter-3)); }
+  .band.winter::after {
+    content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 12px;
+    background: radial-gradient(circle at 10px 100%, #fff 10px, transparent 11px) repeat-x;
+    background-size: 20px 100%;
+  }
+  .band.blackout { background-image: repeating-linear-gradient(135deg, var(--hatch) 0 7px, transparent 7px 14px); }
+  .fx { position: absolute; inset: 0; pointer-events: none; }
+  .leaf, .flake { position: absolute; top: -8%; width: 12px; height: 12px; animation: yet-fall var(--t, 7s) linear var(--dl, 0s) infinite; }
+  .leaf { fill: currentColor; }
+  .flake { width: var(--s, 9px); height: var(--s, 9px); color: #fff; opacity: .9; }
+
+  /* lanes + bars */
+  .lanes { position: relative; z-index: 2; }
+  .lane { position: relative; height: var(--lane); }
+  .lane-label {
+    position: absolute; left: 8px; top: 50%; translate: 0 -50%;
+    display: flex; align-items: center; gap: 7px;
+    padding: 2px 6px; border-radius: 8px; background: rgba(255,255,255,.75);
+    font: 600 14.5px/1.2 var(--body); color: var(--muted); transition: opacity .3s;
+    small { display: none; font-weight: 400; font-size: 13px; }
+  }
+  .lane.dim .lane-label { opacity: .4; }
+  .lane.na .lane-label { opacity: .55; small { display: block; } }
+
+  .leg { position: absolute; top: 8px; height: 68px; z-index: 3; margin-inline: 2px; pointer-events: none; }
+  .bar {
+    display: block; width: 100%; height: 100%; padding: 0; border: 0;
+    border-radius: 10px; background: var(--cat); color: #000;
+    text-align: left; font: inherit; cursor: pointer;
+    container-type: inline-size; opacity: 0; transition: opacity .3s;
+    pointer-events: none;
+
+    &:hover { filter: brightness(.96); }
+    &:focus-visible { outline: 3px solid #000; outline-offset: -4px; }
+    &.open {
+      -webkit-mask-image: linear-gradient(90deg, #000 60%, transparent);
+      mask-image: linear-gradient(90deg, #000 60%, transparent);
+      .t { white-space: nowrap; }
+    }
+  }
+  .leg.show .bar { opacity: 1; pointer-events: auto; }
+  .leg.selected .bar { box-shadow: inset 0 0 0 3px #000; }
+  .in { display: flex; flex-direction: column; justify-content: center; gap: 1px; height: 100%; padding: 3px 12px; overflow: hidden; }
+  .t { font: 600 15px/1.2 var(--body); }
+  .d { font: 500 13px/1.2 var(--body); opacity: .75; }
+  @container (max-width: 90px) {
+    .d { display: none; }
+    .in { padding-inline: 7px; }
+    .t { font-size: 14px; }
+  }
+
+  /* break tags */
+  .foot { position: relative; height: var(--foot); z-index: 3; }
+  .tag {
+    position: absolute; top: 12px; translate: -50% 0;
+    width: max-content; max-width: 220px; padding: 6px 12px;
+    border: 0; border-radius: 9px; font: inherit; text-align: left; white-space: nowrap;
+    cursor: pointer; opacity: 0; transition: opacity .3s; pointer-events: none;
+
+    &::before { content: ""; position: absolute; left: 50%; bottom: 100%; width: 2px; height: 12px; margin-left: -1px; background: var(--stem); }
+    &.show { opacity: 1; pointer-events: auto; }
+    &.selected { box-shadow: 0 0 0 2px #fff, 0 0 0 4px #000; }
+  }
+  .tt { display: flex; align-items: center; gap: 6px; font: 600 14.5px/1.25 var(--head); svg { width: 14px; height: 14px; flex: none; } }
+  .td { display: block; margin-top: 1px; font: 500 13px/1.25 var(--body); opacity: .85; }
+  .tag-autumn { background: #c2410c; color: #fff; --stem: #c2410c; svg { fill: #ffd56b; } }
+  .tag-winter { background: #cbe8fa; color: #000; --stem: #5aa2db; svg { color: #2f6fa8; } }
+  .tag-blackout { background: #fff; color: #000; border: 1px solid var(--line-strong); --stem: var(--line-strong); }
+
+  .today { position: absolute; top: 0; bottom: var(--foot); width: 2px; margin-left: -1px; background: #000; z-index: 1; pointer-events: none; }
+  .today::before {
+    content: "Today"; position: absolute; top: 3px; left: 50%; translate: -50% 0;
+    padding: 1px 7px; border-radius: 999px; background: #000; color: #fff; font: 600 12px var(--head);
+  }
+  .noanim * { transition: none !important; }
+
+  /* ---------- detail strip ---------- */
+  .detail {
+    display: flex; flex-direction: column; justify-content: center; gap: 4px;
+    min-height: 76px; margin-top: 12px; padding: 12px 18px;
+    border-radius: 12px; border-left: 6px solid var(--cat, #e9f44f);
+    background: var(--paper); box-shadow: 0 1px 6px rgba(0,0,0,.12);
+  }
+  .d-main { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; strong { font: 700 18px var(--head); color: #000; } }
+  .when { font-weight: 600; em { margin-left: 6px; font-style: normal; font-weight: 400; color: var(--muted); } }
+  .note { margin: 0; font-size: 15px; color: var(--muted); }
+  .hint { margin: 0; font-size: 16px; color: #000; }
+  .pill { display: inline-flex; align-items: center; padding: 2px 12px; border-radius: 999px; font-size: 14px; background: color-mix(in srgb, var(--cat, #ccc) 35%, #fff); }
+  .pill.plain { background: transparent; border: 1px solid var(--line-strong); color: var(--muted); }
+
+  .footnote { margin: 12px 2px 0; font-size: 14px; line-height: 1.45; color: var(--muted); }
+
+  /* ---------- manager calendar link ---------- */
+  .cta {
+    display: flex; align-items: center; justify-content: center; gap: 16px;
+    width: min(100%, 580px); margin: 22px auto 0; padding: 13px 20px 13px 30px;
+    border: 2px solid #000; border-radius: 999px;
+    background: var(--mgr); color: #000 !important;
+    font: 500 20px var(--head); text-decoration: none !important;
+    animation: yet-ring 3.6s ease-out infinite;
+
+    strong { font-weight: 600; }
+    &:hover { background: #fff; animation-play-state: paused; }
+    &:hover .fly svg { animation-duration: 1.4s; }
+  }
+  .fly { position: relative; width: 104px; height: 32px; overflow: hidden; flex: none; }
+  .fly svg { position: absolute; top: 3px; left: 0; width: 26px; height: 26px; fill: #000; rotate: 90deg; animation: yet-take 3.6s ease-in-out infinite; }
+  .trail {
+    position: absolute; left: 0; top: 50%; width: 100%; height: 2px; margin-top: -1px;
+    background: repeating-linear-gradient(90deg, #000 0 3px, transparent 3px 8px);
+    opacity: .45; transform-origin: left; animation: yet-trail 3.6s ease-in-out infinite;
+  }
+}
+
+@keyframes perf-fly {
+  0%   { offset-distance: 0%; }
+  100% { offset-distance: 100%; }
+}
+@keyframes yet-fall {
+  0%   { top: -8%;  rotate: 0deg;   translate: 0 0; }
+  50%  { rotate: 180deg; translate: 6px 0; }
+  100% { top: 104%; rotate: 360deg; translate: -4px 0; }
+}
+@keyframes yet-take {
+  0%   { translate: -6px 4px; opacity: 0; }
+  12%  { opacity: 1; }
+  55%  { translate: 40px 0; opacity: 1; }
+  85%, 100% { translate: 112px -8px; opacity: 0; }
+}
+@keyframes yet-trail {
+  0%   { scale: 0 1; opacity: 0; }
+  15%  { opacity: .45; }
+  55%  { scale: .55 1; }
+  85%, 100% { scale: 1 1; opacity: 0; }
+}
+@keyframes yet-ring {
+  0%, 55%   { box-shadow: 0 0 0 0 rgba(255,61,219,.55); }
+  90%, 100% { box-shadow: 0 0 0 7px rgba(255,61,219,0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .perf *, .perf *::before, .perf *::after { transition-duration: .01ms !important; animation: none !important; }
+  .perf .yet .leaf, .perf .yet .flake { top: var(--y, 40%); }
+  .perf .airplane { offset-distance: 50%; }
+}
+</style>
+</head>
+<body>
+<div class="perf">
+<section id="yet" class="yet" aria-label="2026 year-end timeline for employees">
+    
+    <div class="controls">
+      <span class="badge"><strong>Employee</strong> Year-End Timeline</span>
+      <div class="chips" id="chips" role="group" aria-label="Filter by event type"></div>
+    </div>
+
+    <div class="scroller">
+      <div class="board" id="board">
+        <div class="months" id="months"></div>
+        <div class="inner">
+          <div class="grid" id="grid"></div>
+          <div class="bands" id="bands"></div>
+          <div class="scale" id="scale"></div>
+          <div class="lanes" id="lanes"></div>
+          <div class="foot" id="foot"></div>
+        </div>
+      </div>
+    </div>
+    <div class="detail" id="detail" aria-live="polite"></div>
+
+    <p class="footnote">*Employees hired before Nov 1, 2026 will participate in the formal year-end review, ensuring sufficient time for a fair assessment. For those who joined Nov 1 or after, managers are expected to hold an informal check-in focused on early feedback and development.</p>
+
+    <a class="cta" href="https://tripadvisor.docebosaas.com/pages/364/year-end-calendar-managers" target="_top" rel="noopener">
+      <span><strong>Managers:</strong> view the manager calendar</span>
+      <span class="fly" aria-hidden="true"><i class="trail"></i><svg><use href="#i-plane"/></svg></span>
+    </a>
+
+    <!-- icon sprite -->
+    <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+      <symbol id="i-plane" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></symbol>
+      <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M12 1L14 6L18 4L17 9L22 9L18.5 12.5L21 16L15.5 15.5L16 20L12.8 18L12.8 23L11.2 23L11.2 18L8 20L8.5 15.5L3 16L5.5 12.5L2 9L7 9L6 4L10 6Z"/></symbol>
+      <symbol id="i-flake" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 2v20M3.34 7l17.32 10M3.34 17L20.66 7"/><path d="M9 4l3 2.5L15 4M9 20l3-2.5 3 2.5"/></g></symbol>
+    </svg>
+  </section>
+</div>
+<script>
+(function () {
+  'use strict';
+
+  /* ---------------- config ---------------- */
+  var VIEW = 'employees';              // 'employees' | 'leaders'
+  var root = document.getElementById('yet');
+  var $  = function (s) { return root.querySelector(s); };
+  var $$ = function (s) { return Array.prototype.slice.call(root.querySelectorAll(s)); };
+
+  var DAY = 864e5, BASE = Date.UTC(2026, 10, 1), N = 92;   // Nov 1 → Jan 31
+  var MON = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+
+  /* ---------------- date helpers ---------------- */
+  function iso(s) { var p = s.split('-').map(Number); return Math.round((Date.UTC(p[0], p[1] - 1, p[2]) - BASE) / DAY); }
+  function lab(i) { var d = new Date(BASE + i * DAY); return MON[d.getUTCMonth()] + ' ' + d.getUTCDate(); }
+  function rng(a, b) { return a === b ? lab(a) : lab(a) + ' – ' + lab(b); }
+  function rngT(a, b) {
+    var x = new Date(BASE + a * DAY), y = new Date(BASE + b * DAY);
+    return x.getUTCMonth() === y.getUTCMonth() ? MON[x.getUTCMonth()] + ' ' + x.getUTCDate() + '–' + y.getUTCDate() : rng(a, b);
+  }
+  function wk(a, b) { var c = 0; for (var i = a; i <= b; i++) { var g = new Date(BASE + i * DAY).getUTCDay(); if (g > 0 && g < 6) c++; } return c; }
+  function todayIdx() { var n = new Date(); return Math.round((Date.UTC(n.getFullYear(), n.getMonth(), n.getDate()) - BASE) / DAY); }
+
+  /* ---------------- data (edit dates here) ---------------- */
+  var BOTH = ['employees', 'leaders'], LEAD = ['leaders'];
+
+  var ALLITEMS = [
+    { id:'feedback', short:'Feedback',       cat:'feedback',    title:'Submit feedback in Workday',                 label:'Submit feedback',                  s:'2026-11-16', e:'2026-12-04', aud:BOTH },
+    { id:'self',     short:'Self reviews',   cat:'written',     title:'Self reviews open in Workday',               label:'Self reviews open',                s:'2026-11-16', e:'2026-12-04', aud:BOTH },
+    { id:'draft',    short:'Manager drafts', cat:'written',     title:'Managers draft written reviews in Workday*', label:'Managers draft written reviews*',  s:'2026-12-07', e:'2027-01-06', aud:BOTH, who:'Managers', note:'The asterisk refers to the note below about who gets a formal review.' },
+    { id:'prelim',   short:'Prelim ratings', cat:'calibration', title:'Prelim ratings in Workday',                  label:'Prelim ratings',                   s:'2026-12-07', e:'2026-12-11', aud:LEAD },
+    { id:'calib',    short:'Calibrations',   cat:'calibration', title:'BU performance calibrations & promo approvals', label:'BU calibrations & promo approvals', s:'2026-12-14', e:'2027-01-06', aud:LEAD },
+    { id:'promo',    short:'Promo recs',     cat:'comp',        title:'Promo recs in Workday',                      label:'Promo recs',                       s:'2026-11-16', e:'2026-12-04', aud:LEAD },
+    { id:'comp',     short:'Compensation planning', cat:'comp', title:'Compensation Planning',                      label:'Compensation Planning',            s:'2027-01-16', e:'2027-01-31', aud:LEAD, open:true, datesText:'Dates TBC', note:'More information will be shared with leaders who will be directly involved in compensation planning.' }
+  ];
+
+  var BREAKS = [
+    { id:'tg',       kind:'break', cat:'breaks', type:'autumn',   title:'Thanksgiving (US)', s:'2026-11-26', e:'2026-11-27', aud:BOTH, label:'Time off', who:'US only',  col:'var(--autumn-2)' },
+    { id:'holiday',  kind:'break', cat:'breaks', type:'winter',   title:'Holiday break',     s:'2026-12-25', e:'2027-01-01', aud:BOTH, label:'Time off', who:'Everyone', col:'var(--winter-3)' },
+    { id:'blackout', kind:'break', cat:'breaks', type:'blackout', title:'Workday blackout',  s:'2027-01-07', e:'2027-01-15', aud:BOTH, label:'Blackout', who:'Everyone', col:'var(--line-strong)', note:'Drafts, calibrations and promo approvals all wrap up Jan 6, the day before the blackout starts.' }
+  ];
+
+  var ITEMS = ALLITEMS.filter(function (i) { return i.aud.indexOf(VIEW) > -1; });
+  var ALL = ITEMS.concat(BREAKS), byId = {};
+  ALL.forEach(function (i) { byId[i.id] = i; });
+
+  var LANES = [
+    { cat:'feedback', label:'Feedback' }, { cat:'written', label:'Written drafts' },
+    { cat:'calibration', label:'Calibrations' }, { cat:'comp', label:'Compensation' }
+  ].filter(function (L) { return ITEMS.some(function (i) { return i.cat === L.cat; }); });
+
+  var CHIPS = [
+    { k:'feedback', l:'Feedback' }, { k:'written', l:'Written drafts' },
+    { k:'calibration', l:'Calibrations' }, { k:'comp', l:'Compensation' }, { k:'breaks', l:'Breaks' }
+  ].filter(function (c) { return c.k === 'breaks' || LANES.some(function (L) { return L.cat === c.k; }); });
+
+  var CATLAB = { feedback:'Feedback', written:'Written drafts', calibration:'Calibrations', comp:'Compensation' };
+
+  var state = { active: { feedback:true, written:true, calibration:true, comp:true, breaks:true }, sel: null };
+  var board = $('#board');
+
+  /* ---------------- small utils ---------------- */
+  function visible(it) { return state.active[it.cat]; }
+  function whoText(it) { return it.who || (it.aud.length > 1 ? 'Employees and managers' : 'Managers only'); }
+  function colOf(it)   { return it.col || 'var(--c-' + it.cat + ')'; }
+  function pct(x)      { return (x / N * 100) + '%'; }
+  function rand(a, b)  { return a + Math.random() * (b - a); }
+
+  /* ---------------- build ---------------- */
+  function build() {
+    $('#months').innerHTML = [['November', 30], ['December', 31], ['January 2027', 31]]
+      .map(function (m) { return '<div class="month" style="flex:' + m[1] + '">' + m[0] + '</div>'; }).join('');
+
+    var g = '', s = '';
+    for (var i = 1; i < N; i += 7) {
+      g += '<i class="gl" style="left:' + pct(i) + '"></i>';
+      s += '<span class="sl" style="left:' + pct(i) + '" title="Week of ' + lab(i) + '" aria-hidden="true">' + new Date(BASE + i * DAY).getUTCDate() + '</span>';
+    }
+    g += '<i class="gl m" style="left:' + pct(30) + '"></i><i class="gl m" style="left:' + pct(61) + '"></i>';
+    $('#grid').innerHTML = g;
+    $('#scale').innerHTML = s;
+
+    var lanesEl = $('#lanes');
+    LANES.forEach(function (L) {
+      var lane = document.createElement('div');
+      lane.className = 'lane'; lane.dataset.cat = L.cat;
+      lane.style.setProperty('--cat', 'var(--c-' + L.cat + ')');
+      lane.innerHTML = '<span class="lane-label"><i class="bub"></i><span>' + L.label + '<small>Managers only</small></span></span>';
+      ITEMS.filter(function (i) { return i.cat === L.cat; }).forEach(function (it) { lane.appendChild(legEl(it)); });
+      lanesEl.appendChild(lane);
+    });
+
+    var bands = $('#bands'), foot = $('#foot');
+    BREAKS.forEach(function (b) {
+      var a = iso(b.s), e = iso(b.e), len = e - a + 1;
+
+      var band = document.createElement('div');
+      band.className = 'band ' + b.type; band.dataset.id = b.id;
+      band.style.left = pct(a); band.style.width = pct(len);
+      band.innerHTML = '<div class="fx" data-fx="' + b.type + '"></div>';
+      bands.appendChild(band);
+
+      var tag = document.createElement('button');
+      tag.type = 'button'; tag.className = 'tag tag-' + b.type; tag.dataset.id = b.id;
+      tag.style.left = pct(a + len / 2);
+      tag.setAttribute('aria-label', b.title + ', ' + rng(a, e));
+      var ic = b.type === 'autumn' ? '<svg aria-hidden="true"><use href="#i-leaf"/></svg>'
+             : b.type === 'winter' ? '<svg aria-hidden="true"><use href="#i-flake"/></svg>' : '';
+      tag.innerHTML = '<span class="tt">' + ic + b.title + '</span><span class="td">' + (b.type === 'winter' ? rng(a, e) : rngT(a, e)) + '</span>';
+      foot.appendChild(tag);
+    });
+
+    var t = todayIdx();
+    if (t >= 0 && t < N) {
+      var m = document.createElement('i');
+      m.className = 'today'; m.style.left = pct(t + .5);
+      $('.inner').appendChild(m);
+    }
+    fx();
+  }
+
+  function legEl(it) {
+    var a = iso(it.s), e = iso(it.e), len = e - a + 1;
+    var el = document.createElement('div');
+    el.className = 'leg'; el.dataset.id = it.id;
+    el.style.cssText = '--cat:var(--c-' + it.cat + ');left:' + pct(a) + ';width:calc(' + (len / N * 100) + '% - 4px)';
+    var dt = it.datesText || rng(a, e);
+    el.innerHTML = '<button type="button" class="bar' + (it.open ? ' open' : '') + '" aria-label="' + it.title + ', ' + dt + '">' +
+                   '<span class="in"><span class="t">' + it.label + '</span><span class="d">' + dt + '</span></span></button>';
+    return el;
+  }
+
+  function fx() {
+    var cols = ['#FFD56B', '#FFF1C9', '#7A1F0B', '#FFB347', '#C2410C'];
+    var a = $('[data-fx="autumn"]'), w = $('[data-fx="winter"]');
+    if (a) for (var i = 0; i < 5; i++)
+      a.insertAdjacentHTML('beforeend', '<svg class="leaf" aria-hidden="true" style="left:' + rand(-10, 55) + '%;--t:' + rand(5, 8).toFixed(1) + 's;--dl:-' + rand(0, 8).toFixed(1) + 's;--y:' + rand(10, 85).toFixed(0) + '%;color:' + cols[i] + '"><use href="#i-leaf"/></svg>');
+    if (w) for (var j = 0; j < 14; j++)
+      w.insertAdjacentHTML('beforeend', '<svg class="flake" aria-hidden="true" style="left:' + rand(0, 90).toFixed(0) + '%;--s:' + rand(7, 12).toFixed(0) + 'px;--t:' + rand(6, 11).toFixed(1) + 's;--dl:-' + rand(0, 10).toFixed(1) + 's;--y:' + rand(10, 80).toFixed(0) + '%"><use href="#i-flake"/></svg>');
+  }
+
+  /* ---------------- state → DOM ---------------- */
+  function sync() {
+    $$('.leg').forEach(function (l)  { var on = visible(byId[l.dataset.id]); l.classList.toggle('show', on); l.inert = !on; });
+    $$('.band').forEach(function (b) { b.classList.toggle('show', visible(byId[b.dataset.id])); });
+    $$('.tag').forEach(function (t)  { var on = visible(byId[t.dataset.id]); t.classList.toggle('show', on); t.inert = !on; });
+    $$('.lane').forEach(function (l) {
+      var its = ITEMS.filter(function (i) { return i.cat === l.dataset.cat; });
+      l.classList.toggle('dim', !its.some(visible));
+    });
+    if (state.sel && !visible(byId[state.sel])) state.sel = null;
+    $$('[data-id]').forEach(function (e) { e.classList.toggle('selected', e.dataset.id === state.sel); });
+    renderDetail();
+  }
+
+  function names(arr) {
+    var l = arr.map(function (i) { return i.short.toLowerCase(); });
+    l[0] = l[0].charAt(0).toUpperCase() + l[0].slice(1);
+    return l.length > 1 ? l.slice(0, -1).join(', ') + ' and ' + l[l.length - 1] : l[0];
+  }
+
+  function statusText() {
+    var today = todayIdx();
+    var first = Math.min.apply(null, ITEMS.map(function (i) { return iso(i.s); }));
+    if (today < first) {
+      var k = first - today, st = ITEMS.filter(function (i) { return iso(i.s) === first; });
+      return names(st) + ' open ' + lab(first) + ', ' + (k === 1 ? 'tomorrow' : k + ' days from now') + '. Select any bar for details.';
+    }
+    var act = ITEMS.filter(function (i) { return iso(i.s) <= today && today <= iso(i.e); });
+    if (act.length) return 'Open now: ' + names(act) + '. Select any bar for details.';
+    var nx = ITEMS.filter(function (i) { return iso(i.s) > today; }).sort(function (a, b) { return iso(a.s) - iso(b.s); })[0];
+    return nx ? 'Next up: ' + nx.short.toLowerCase() + ' starts ' + lab(iso(nx.s)) + '.' : 'The 2026 review cycle has wrapped up.';
+  }
+
+  function renderDetail() {
+    var el = $('#detail'), it = state.sel && byId[state.sel];
+    if (!it) {
+      el.style.removeProperty('--cat');
+      el.innerHTML = '<p class="hint">' + statusText() + '</p>';
+      return;
+    }
+    var a = iso(it.s), e = iso(it.e), len = e - a + 1;
+    var when = it.datesText ? 'Starts after the blackout, dates TBC' : rng(a, e);
+    var span = it.datesText ? '' : '<em>' + len + (len === 1 ? ' day' : ' days') + ', ' + wk(a, e) + ' weekdays</em>';
+    var cat = it.kind === 'break' ? it.label : CATLAB[it.cat];
+    el.style.setProperty('--cat', colOf(it));
+    el.innerHTML = '<div class="d-main"><strong>' + it.title + '</strong><span class="when">' + when + span + '</span>' +
+                   '<span class="pill">' + cat + '</span><span class="pill plain">' + whoText(it) + '</span></div>' +
+                   (it.note ? '<p class="note">' + it.note + '</p>' : '');
+  }
+
+  function renderChips() {
+    var box = $('#chips');
+    if (!box.children.length) {
+      box.innerHTML = CHIPS.map(function (c) {
+        return '<button type="button" class="chip" data-k="' + c.k + '" style="--cat:var(--c-' + c.k + ')"><i class="bub"></i>' + c.l + '</button>';
+      }).join('') + '<button type="button" class="linkbtn" id="reset" hidden>Show all</button>';
+    }
+    var off = false;
+    $$('.chip').forEach(function (c) {
+      var k = c.dataset.k;
+      c.setAttribute('aria-pressed', state.active[k]);
+      if (!state.active[k]) off = true;
+    });
+    $('#reset').hidden = !off;
+  }
+
+  function update() { renderChips(); sync(); try { parent.postMessage({ type: 'year-end-timeline:height', height: document.documentElement.scrollHeight }, '*'); } catch (e) {} }
+
+  /* ---------------- events ---------------- */
+  root.addEventListener('click', function (e) {
+    var c = e.target.closest('.chip');
+    if (c) { state.active[c.dataset.k] = !state.active[c.dataset.k]; update(); return; }
+    if (e.target.closest('#reset')) { Object.keys(state.active).forEach(function (k) { state.active[k] = true; }); update(); return; }
+    var t = e.target.closest('#board [data-id]');
+    if (t) { state.sel = state.sel === t.dataset.id ? null : t.dataset.id; sync(); }
+  });
+  root.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && state.sel) { state.sel = null; sync(); }
+  });
+
+  /* ---------------- init ---------------- */
+  build();
+  board.classList.add('noanim');
+  update();
+  void board.offsetWidth;
+  board.classList.remove('noanim');
+})();
+</script>
+</body>
+</html>
