@@ -26,8 +26,14 @@ html,body{margin:0;background:transparent}
 body{color:var(--ink);font-family:var(--body);font-size:15px;line-height:1.4;-webkit-font-smoothing:antialiased}
 button{font-family:inherit}
 :focus-visible{outline:3px solid var(--focus);outline-offset:2px}
-h1{margin:0 0 18px;font:800 clamp(2rem,4.6vw,3.4rem)/1.08 var(--head);letter-spacing:-.02em;text-wrap:balance;max-width:24ch}
+h1{margin:0;flex:1 1 420px;min-width:0;font:800 clamp(2rem,4.6vw,3.4rem)/1.08 var(--head);letter-spacing:-.02em;text-wrap:balance;max-width:24ch}
 h1 #aud{background:var(--mgr);padding:0 .22em;border-radius:.3em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+.titlebar{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 24px;margin-bottom:18px}
+.back{display:inline-flex;align-items:center;gap:12px;flex:none;padding:14px 28px 14px 22px;background:var(--lime);color:#000;border:2px solid #000;border-radius:999px;font:500 19px var(--head);text-decoration:none;transition:background .2s}
+.back strong{font-weight:700}
+.back svg{width:26px;height:26px;fill:#000;rotate:-90deg;transition:translate .3s cubic-bezier(.3,1.4,.5,1)}
+.back:hover{background:#fff}
+.back:hover svg{translate:0 -5px}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .page{max-width:1280px;margin:0 auto;padding:10px 8px 14px}
 
@@ -153,12 +159,16 @@ h1 #aud{background:var(--mgr);padding:0 .22em;border-radius:.3em;-webkit-box-dec
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-plane" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5c0-.83-.67-1.5-1.5-1.5S10 2.67 10 3.5V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/></symbol>
   <symbol id="i-leaf" viewBox="0 0 24 24"><path d="M12 1L14 6L18 4L17 9L22 9L18.5 12.5L21 16L15.5 15.5L16 20L12.8 18L12.8 23L11.2 23L11.2 18L8 20L8.5 15.5L3 16L5.5 12.5L2 9L7 9L6 4L10 6Z"/></symbol>
   <symbol id="i-flake" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 2v20M3.34 7l17.32 10M3.34 17L20.66 7"/><path d="M9 4l3 2.5L15 4M9 20l3-2.5 3 2.5"/></g></symbol>
 </svg>
 
 <main class="page">
-  <h1>2026 Year-End Timeline for <span id="aud">Managers</span></h1>
+  <div class="titlebar">
+    <h1>2026 Year-End Timeline for <span id="aud">Managers</span></h1>
+    <a class="back" href="https://tripadvisor.docebosaas.com/pages/356/performance-hub" target="_top" rel="noopener"><svg aria-hidden="true"><use href="#i-plane"/></svg>Back to <strong>Performance Hub</strong></a>
+  </div>
 
   <div class="controls">
     <div class="chips" id="chips" role="group" aria-label="Filter by event type"></div>
