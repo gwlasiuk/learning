@@ -218,12 +218,12 @@ function wk(a,b){var c=0;for(var i=a;i<=b;i++){var g=new Date(BASE+i*DAY).getUTC
 
 var BOTH=['employees','leaders'], LEAD=['leaders'];
 var ALLITEMS=[
- {id:'feedback',short:'Feedback',cat:'feedback',title:'Submit feedback in Workday',label:'Submit feedback',s:'2026-11-16',e:'2026-12-04',aud:BOTH},
+ {id:'feedback',short:'Feedback',cat:'feedback',title:'Submit feedback in Workday',label:'Submit feedback',s:'2026-11-16',e:'2026-12-04',aud:BOTH,note:'Managers must submit both the feedback request and promotion recommendation task in order to view that employee\u2019s completed self-review and begin their manager review.'},
  {id:'self',short:'Self reviews',cat:'written',title:'Self reviews open in Workday',label:'Self reviews open',s:'2026-11-16',e:'2026-12-04',aud:BOTH},
  {id:'draft',short:'Manager drafts',cat:'written',title:'Managers draft written reviews in Workday*',label:'Managers draft written reviews*',s:'2026-12-07',e:'2027-01-06',aud:BOTH,who:'Managers',note:'The asterisk refers to the note below about who gets a formal review.'},
  {id:'prelim',short:'Prelim ratings',cat:'calibration',title:'Prelim ratings in Workday',label:'Prelim ratings',s:'2026-12-07',e:'2026-12-11',aud:LEAD},
  {id:'calib',short:'Calibrations',cat:'calibration',title:'BU performance calibrations & promo approvals',label:'BU calibrations & promo approvals',s:'2026-12-14',e:'2027-01-06',aud:LEAD},
- {id:'promo',short:'Promo recs',cat:'comp',title:'Promo recs in Workday',label:'Promo recs',s:'2026-11-16',e:'2026-12-04',aud:LEAD},
+ {id:'promo',short:'Promo recs',cat:'comp',title:'Promo recs in Workday',label:'Promo recs',s:'2026-11-16',e:'2026-12-04',aud:LEAD,note:'Managers must submit both the feedback request and promotion recommendation task in order to view that employee\u2019s completed self-review and begin their manager review.'},
  {id:'comp',short:'Compensation planning',cat:'comp',title:'Compensation Planning',label:'Compensation Planning',s:'2027-01-16',e:'2027-01-31',aud:LEAD,open:true,datesText:'Dates TBC',note:'More information will be shared with leaders who will be directly involved in compensation planning.'}
 ];
 var ITEMS=ALLITEMS.filter(function(i){return i.aud.indexOf(VIEW)>-1});
